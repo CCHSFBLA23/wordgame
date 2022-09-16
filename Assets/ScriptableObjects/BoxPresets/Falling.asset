@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3845d584a0f63247bc425427b11e4b3, type: 3}
-  m_Name: Pullable
+  m_Name: Falling
   m_EditorClassIdentifier: 
-  boxColor: {r: 1, g: 0, b: 0.58642006, a: 1}
-  textColor: {r: 0, g: 0, b: 0, a: 1}
-  pushable: 0
-  pullable: 1
+  boxColor: {r: 0, g: 0.43554688, b: 1, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  pushable: 1
+  pullable: 0
   weak: 0
-  falling: 0
+  falling: 1
   moving: 0
   sticky: 0

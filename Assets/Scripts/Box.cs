@@ -18,9 +18,10 @@ public class Box : GridPosition
     [HideInInspector]public bool pushable = true;
     [HideInInspector]public bool pullable = false;
     [HideInInspector]public bool sticky = false;
-    [HideInInspector]public bool weak = false;
+    [HideInInspector]public bool weak = false; 
     [HideInInspector]public bool falling = false;
     [HideInInspector]public bool moving = false;
+    [HideInInspector] public bool linked = false;
 
 
     protected override void Start()
@@ -51,6 +52,7 @@ public class Box : GridPosition
         sticky = preset.sticky;
         falling = preset.falling;
         moving = preset.moving;
+        linked = preset.linked;
 
     }
 }

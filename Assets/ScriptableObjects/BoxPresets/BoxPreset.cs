@@ -13,4 +13,5 @@ public class BoxPreset : ScriptableObject
     public bool falling = false;
     public bool moving = false;
     public bool sticky = false;
+    public bool linked = false;
 }
