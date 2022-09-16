@@ -118,33 +118,53 @@ public class LevelManager : MonoBehaviour
             return true;
         }
     }
-    private bool PullRowOfBoxes(Vector2 position, Vector2 moveVector)
+    void PullRowOfBoxes(Vector2 position, Vector2 moveVector)
     {
         Box cur;
         var toPull = new List<GridPosition>();
-        
-        if (CheckBoxCollision(position, -moveVector))
-        {
-            cur = CheckBoxCollision(position, -moveVector);
-            if (!cur.pullable) return false;
-            toPull.Add(cur);
-        }
-        else
-        {
-            return false;
-        }
 
+        if (!CheckBoxCollision(position, -moveVector)) return;
+        cur = CheckBoxCollision(position, -moveVector);
+        if (!cur.pullable) return;
+        toPull.Add(cur);
+        
         while (CheckBoxCollision(cur.target, -moveVector))
         {
             cur = CheckBoxCollision(cur.target, -moveVector);
-            if (!cur.pullable) return false;
+            if (!cur.pullable) break;
             toPull.Add(cur);
         }
+
         foreach (var gridPosition in toPull)
         {
             gridPosition.target += moveVector;
         }
-        return true;
+
+        // if (CheckBoxCollision(position, -moveVector))
+        // {
+        //     cur = CheckBoxCollision(position, -moveVector);
+        //     if (!cur.pullable) return false;
+        //     toPull.Add(cur);
+        // }
+        // else
+        // {
+        //     return false;
+        // }
+        //
+        // while (CheckBoxCollision(cur.target, -moveVector))
+        // {
+        //     cur = CheckBoxCollision(cur.target, -moveVector);
+        //     if (!cur.pullable) break;
+        //     toPull.Add(cur);
+        // }
+        // foreach (var gridPosition in toPull)
+        // {
+        //     gridPosition.target += moveVector;
+        // }
+        // return true;
+        //
+        
+        
         
     }
 
@@ -157,17 +177,12 @@ public class LevelManager : MonoBehaviour
         Vector2 moveVector = CalcMoveVector(_inputVector);
 
         bool canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
-        bool canPullBoxes = PullRowOfBoxes(_playerPosition.target, moveVector);
 
         if (!CheckWallCollisions(_playerPosition.target, moveVector) && canMoveBoxes)
         {
+            PullRowOfBoxes(_playerPosition.target, moveVector);
             _playerPosition.target += moveVector;
         }
-        else if (!CheckWallCollisions(_playerPosition.target, moveVector) && canPullBoxes)
-        {
-            _playerPosition.target += moveVector;
-        }
-
     }
 
     private Vector2 CalcMoveVector(Vector2 input)
