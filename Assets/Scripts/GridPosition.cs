@@ -13,11 +13,17 @@ public class GridPosition : MonoBehaviour
     [HideInInspector] public Vector2 current;
     [HideInInspector] public Vector2 target;
     [SerializeField] private float moveSpeed = 20f;
-    
-    protected virtual void Start()
+
+
+    private void Awake()
     {
         var position = transform.position;
         target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
+    }
+
+    protected virtual void Start()
+    {
+        
     }
     
     protected virtual void Update()

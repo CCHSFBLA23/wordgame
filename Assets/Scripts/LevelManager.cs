@@ -24,17 +24,29 @@ public class LevelManager : MonoBehaviour
     //Input Manager
     private Vector2 _inputVector;
 
+    //Reset Function
+    private Dictionary<GridPosition, Vector2> startingLocations = new Dictionary<GridPosition, Vector2>();
+
     private void Start()
     {
         _playerPosition = player.GetComponent<GridPosition>();
+        startingLocations[_playerPosition] = _playerPosition.target;
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
         _boxes = new Box[boxObjects.Length];
         for (int i = 0; i < boxObjects.Length; i++)
         {
             _boxes[i] = boxObjects[i].GetComponent<Box>();
+            startingLocations[_boxes[i]] = _boxes[i].target;
         }
     }
-    
+    //Moves back to beginning. Stores them in dictionary in the start.
+    public void Reset()
+    {
+        foreach (var pair in startingLocations)
+        {
+            pair.Key.target = pair.Value;
+        }
+    }
     private void OnMove(InputValue value)
     {
         _inputVector = value.Get<Vector2>();
