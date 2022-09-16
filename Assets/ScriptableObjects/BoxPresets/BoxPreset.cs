@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BoxType", menuName = "ScriptableObjects/BoxPreset")]
 public class BoxPreset : ScriptableObject
 {
-    public Color color = Color.white;
+    public Color boxColor = Color.white;
+    public Color textColor = Color.black;
     public bool pushable = true;
 }
