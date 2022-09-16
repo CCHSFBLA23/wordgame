@@ -10,8 +10,8 @@ public class GridPosition : MonoBehaviour
     //Used to move around the grid with lerp. Boxes inherit this class to be able to handle their properties
     //without calling a bunch of GetComponent<> calls
 
-    [HideInInspector] public Vector2 current;
-    [HideInInspector] public Vector2 target;
+    public Vector2 current;
+    public Vector2 target;
     [SerializeField] private float moveSpeed = 20f;
 
 

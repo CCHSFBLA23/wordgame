@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEditor.Search;
@@ -17,13 +18,17 @@ public class LevelManager : MonoBehaviour
     
     //Game Objects
     public GameObject player;
+    //Box lists for each type that needs it.
     private Box[] _boxes;
+    private List<Box> _falling = new List<Box>();
+    private List<Box> _linked = new List<Box>();
+    
     private GridPosition _playerPosition;
     public Tilemap walls;
     
     //Input Manager
     private Vector2 _inputVector;
-
+    
     //Reset Function
     private Dictionary<GridPosition, Vector2> startingLocations = new Dictionary<GridPosition, Vector2>();
 
@@ -31,12 +36,24 @@ public class LevelManager : MonoBehaviour
     {
         _playerPosition = player.GetComponent<GridPosition>();
         startingLocations[_playerPosition] = _playerPosition.target;
+        
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
         _boxes = new Box[boxObjects.Length];
+        
         for (int i = 0; i < boxObjects.Length; i++)
         {
             _boxes[i] = boxObjects[i].GetComponent<Box>();
+            //Sets starting positions for each of the boxes.
             startingLocations[_boxes[i]] = _boxes[i].target;
+            //Adds boxes of type in to list.
+            if (_boxes[i].falling)
+            {
+                _falling.Add(_boxes[i]);
+            }
+            if (_boxes[i].linked)
+            {
+                _linked.Add(_boxes[i]);
+            }
         }
     }
     //Moves back to beginning. Stores them in dictionary in the start.
@@ -67,10 +84,9 @@ public class LevelManager : MonoBehaviour
     {
         foreach (var t in _boxes)
         {
-            Box cur = t;
-            if (cur.target == position + moveVector)
+            if (t.target == position + moveVector)
             {
-                return cur;
+                return t;
             }
         }
 
@@ -86,7 +102,7 @@ public class LevelManager : MonoBehaviour
     {
         Box cur;
         var toPush = new List<GridPosition>();
-        
+
         if (CheckBoxCollision(position, moveVector))
         {
             cur = CheckBoxCollision(position, moveVector);
@@ -118,6 +134,8 @@ public class LevelManager : MonoBehaviour
             return true;
         }
     }
+    //Pushes in negative move vector basically.
+    //See PushRowOfBoxes for a similar process.
     void PullRowOfBoxes(Vector2 position, Vector2 moveVector)
     {
         Box cur;
@@ -139,44 +157,31 @@ public class LevelManager : MonoBehaviour
         {
             gridPosition.target += moveVector;
         }
-
-        // if (CheckBoxCollision(position, -moveVector))
-        // {
-        //     cur = CheckBoxCollision(position, -moveVector);
-        //     if (!cur.pullable) return false;
-        //     toPull.Add(cur);
-        // }
-        // else
-        // {
-        //     return false;
-        // }
-        //
-        // while (CheckBoxCollision(cur.target, -moveVector))
-        // {
-        //     cur = CheckBoxCollision(cur.target, -moveVector);
-        //     if (!cur.pullable) break;
-        //     toPull.Add(cur);
-        // }
-        // foreach (var gridPosition in toPull)
-        // {
-        //     gridPosition.target += moveVector;
-        // }
-        // return true;
-        //
-        
-        
-        
     }
 
     //Deals with sending input to the player target (aka preventing it from jumping around).
     //Checks walls and the box pushing stuff above.
-    private void MovePlayer()
+    private void CalculateMovementPlayer()
     {
         if (!(Vector2.Distance(_playerPosition.current, _playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
-
-        Vector2 moveVector = CalcMoveVector(_inputVector);
-
-        bool canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+        
+        var moveVector = CalcMoveVector(_inputVector);
+        
+        var canMoveBoxes = true;
+        if (CheckBoxCollision(_playerPosition.target, moveVector))
+        {
+            //Checks if the original box pushed is a linked box.
+            var originalBox = CheckBoxCollision(_playerPosition.target, moveVector);
+            canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+            if (originalBox.linked && canMoveBoxes)
+            {
+                foreach (var box in _linked.Where(box => box != originalBox))
+                {
+                    PushRowOfBoxes(box.target - moveVector, moveVector);
+                }
+            }
+        }
+        
 
         if (!CheckWallCollisions(_playerPosition.target, moveVector) && canMoveBoxes)
         {
@@ -184,7 +189,27 @@ public class LevelManager : MonoBehaviour
             _playerPosition.target += moveVector;
         }
     }
-
+    private void CalculateFallingMovement()
+    {
+        
+        foreach (var box in _falling)
+        {
+            
+            if(Vector2.Distance(box.target, box.current) > 0.1f) return;
+            Vector2 cur = box.target;
+            if (cur + Vector2.down == _playerPosition.target) return;
+            
+            while (true)
+            {
+                
+                if (CheckWallCollisions(cur, Vector2.down)) break;
+                if (CheckBoxCollision(cur, Vector2.down)) break;
+                
+                cur += Vector2.down;
+            }
+            box.target = cur;
+        }
+    }
     private Vector2 CalcMoveVector(Vector2 input)
     {
         Vector2 moveVector = new Vector2();
@@ -198,7 +223,8 @@ public class LevelManager : MonoBehaviour
     
     private void Update()
     {
-        MovePlayer();
+        CalculateMovementPlayer();
+        CalculateFallingMovement();
     }
 
 }
