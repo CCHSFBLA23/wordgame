@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3845d584a0f63247bc425427b11e4b3, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 1, a: 1}
+  boxColor: {r: 0.78823537, g: 0.79215693, b: 0.85098046, a: 1}
+  textColor: {r: 0, g: 0, b: 0, a: 1}
   pushable: 1

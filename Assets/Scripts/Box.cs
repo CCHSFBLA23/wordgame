@@ -35,8 +35,9 @@ public class Box : GridPosition
     private void UpdateVisualsAndProperties()
     {
         //Appearance
-        _spriteRenderer.color = preset.color;
+        _spriteRenderer.color = preset.boxColor;
         _text.text = letter;
+        _text.color = preset.textColor;
         
         pushable = preset.pushable;
     }
