@@ -16,6 +16,12 @@ public class Box : GridPosition
     private TMP_Text _text;
 
     [HideInInspector]public bool pushable = true;
+    [HideInInspector]public bool pullable = false;
+    [HideInInspector]public bool sticky = false;
+    [HideInInspector]public bool weak = false;
+    [HideInInspector]public bool falling = false;
+    [HideInInspector]public bool moving = false;
+
 
     protected override void Start()
     {
@@ -40,5 +46,11 @@ public class Box : GridPosition
         _text.color = preset.textColor;
         
         pushable = preset.pushable;
+        pullable = preset.pullable;
+        weak = preset.weak;
+        sticky = preset.sticky;
+        falling = preset.falling;
+        moving = preset.moving;
+
     }
 }
