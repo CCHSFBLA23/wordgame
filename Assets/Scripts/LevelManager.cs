@@ -106,6 +106,35 @@ public class LevelManager : MonoBehaviour
             return true;
         }
     }
+    private bool PullRowOfBoxes(Vector2 position, Vector2 moveVector)
+    {
+        Box cur;
+        var toPull = new List<GridPosition>();
+        
+        if (CheckBoxCollision(position, -moveVector))
+        {
+            cur = CheckBoxCollision(position, -moveVector);
+            if (!cur.pullable) return false;
+            toPull.Add(cur);
+        }
+        else
+        {
+            return false;
+        }
+
+        while (CheckBoxCollision(cur.target, -moveVector))
+        {
+            cur = CheckBoxCollision(cur.target, -moveVector);
+            if (!cur.pullable) return false;
+            toPull.Add(cur);
+        }
+        foreach (var gridPosition in toPull)
+        {
+            gridPosition.target += moveVector;
+        }
+        return true;
+        
+    }
 
     //Deals with sending input to the player target (aka preventing it from jumping around).
     //Checks walls and the box pushing stuff above.
@@ -116,8 +145,13 @@ public class LevelManager : MonoBehaviour
         Vector2 moveVector = CalcMoveVector(_inputVector);
 
         bool canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+        bool canPullBoxes = PullRowOfBoxes(_playerPosition.target, moveVector);
 
         if (!CheckWallCollisions(_playerPosition.target, moveVector) && canMoveBoxes)
+        {
+            _playerPosition.target += moveVector;
+        }
+        else if (!CheckWallCollisions(_playerPosition.target, moveVector) && canPullBoxes)
         {
             _playerPosition.target += moveVector;
         }

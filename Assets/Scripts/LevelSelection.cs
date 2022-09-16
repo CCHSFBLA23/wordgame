@@ -17,11 +17,11 @@ public class LevelSelection : MonoBehaviour
             GameObject button = Instantiate(levelButton, this.transform);
             button.GetComponentInChildren<TMP_Text>().text = i.ToString();
             int childIndex = button.transform.GetSiblingIndex() + 1;
-            button.GetComponent<Button>().onClick.AddListener(() => goToLevel(childIndex));
+            button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(childIndex));
         }
     }
 
-    void goToLevel(int levelIndex)
+    void GoToLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
     }
