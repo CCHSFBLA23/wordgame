@@ -24,6 +24,9 @@ public class Box : GridPosition
     [HideInInspector]public bool linked = false;
 
 
+    [HideInInspector] public bool linkedMoved = false;
+
+
     protected override void Start()
     {
         base.Start();
