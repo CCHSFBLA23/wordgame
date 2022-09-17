@@ -11,7 +11,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 
-public class LevelManager : MonoBehaviour
+public class BoxHandler : MonoBehaviour
 {
     //Mainly where I am planning to work on most of the game physics.
     //could possibly break into separate classes, but I think it would just be annoying to maintain
@@ -19,51 +19,46 @@ public class LevelManager : MonoBehaviour
     //Game Objects
     public GameObject player;
     //Box lists for each type that needs it.
-    private Box[] _boxes;
+    [HideInInspector]public Box[] boxes;
     private List<Box> _falling = new List<Box>();
     private List<Box> _linked = new List<Box>();
-    
-    private GridPosition _playerPosition;
+
+    private LevelHandler _levelHandler;
+    [HideInInspector]public GridPosition playerPosition;
     public Tilemap walls;
     
     //Input Manager
     private Vector2 _inputVector;
     
-    //Reset Function
-    private Dictionary<GridPosition, Vector2> startingLocations = new Dictionary<GridPosition, Vector2>();
+
 
     private void Start()
     {
-        _playerPosition = player.GetComponent<GridPosition>();
-        startingLocations[_playerPosition] = _playerPosition.target;
+        playerPosition = player.GetComponent<GridPosition>();
+        
         
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
-        _boxes = new Box[boxObjects.Length];
+        boxes = new Box[boxObjects.Length];
         
         for (int i = 0; i < boxObjects.Length; i++)
         {
-            _boxes[i] = boxObjects[i].GetComponent<Box>();
+            boxes[i] = boxObjects[i].GetComponent<Box>();
             //Sets starting positions for each of the boxes.
-            startingLocations[_boxes[i]] = _boxes[i].target;
             //Adds boxes of type in to list.
-            if (_boxes[i].falling)
+            if (boxes[i].falling)
             {
-                _falling.Add(_boxes[i]);
+                _falling.Add(boxes[i]);
             }
-            if (_boxes[i].linked)
+            if (boxes[i].linked)
             {
-                _linked.Add(_boxes[i]);
+                _linked.Add(boxes[i]);
             }
         }
+
+        _levelHandler = GetComponent<LevelHandler>();
     }
     //Moves back to beginning. Stores them in dictionary in the start.
-    public void Reset()
-    {
-        foreach (var pair in startingLocations)
-        {
-            pair.Key.target = pair.Value;
-        }
-    }
+    
     private void OnMove(InputValue value)
     {
         _inputVector = value.Get<Vector2>();
@@ -80,9 +75,9 @@ public class LevelManager : MonoBehaviour
     
     //Checks if there is a box in the scene that is at the position that is about to be moved to.
     //Returns either a reference to the object or null.
-    private Box CheckBoxCollision(Vector2 position, Vector2 moveVector)
+    public Box CheckBoxCollision(Vector2 position, Vector2 moveVector)
     {
-        foreach (var t in _boxes)
+        foreach (var t in boxes)
         {
             if (t.target == position + moveVector)
             {
@@ -163,16 +158,17 @@ public class LevelManager : MonoBehaviour
     //Checks walls and the box pushing stuff above.
     private void CalculateMovementPlayer()
     {
-        if (!(Vector2.Distance(_playerPosition.current, _playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
+        if (!(Vector2.Distance(playerPosition.current, playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
         
         var moveVector = CalcMoveVector(_inputVector);
         
         var canMoveBoxes = true;
-        if (CheckBoxCollision(_playerPosition.target, moveVector))
+        if (CheckBoxCollision(playerPosition.target, moveVector))
         {
             //Checks if the original box pushed is a linked box.
-            var originalBox = CheckBoxCollision(_playerPosition.target, moveVector);
-            canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+            var originalBox = CheckBoxCollision(playerPosition.target, moveVector);
+            canMoveBoxes = PushRowOfBoxes(playerPosition.target, moveVector);
+            //todo fix because broken!11!!! for now make it so there are only two linked per screen until fixed.
             if (originalBox.linked && canMoveBoxes)
             {
                 foreach (var box in _linked.Where(box => box != originalBox))
@@ -183,10 +179,10 @@ public class LevelManager : MonoBehaviour
         }
         
 
-        if (!CheckWallCollisions(_playerPosition.target, moveVector) && canMoveBoxes)
+        if (!CheckWallCollisions(playerPosition.target, moveVector) && canMoveBoxes)
         {
-            PullRowOfBoxes(_playerPosition.target, moveVector);
-            _playerPosition.target += moveVector;
+            PullRowOfBoxes(playerPosition.target, moveVector);
+            playerPosition.target += moveVector;
         }
     }
     private void CalculateFallingMovement()
@@ -197,7 +193,7 @@ public class LevelManager : MonoBehaviour
             
             if(Vector2.Distance(box.target, box.current) > 0.1f) return;
             Vector2 cur = box.target;
-            if (cur + Vector2.down == _playerPosition.target) return;
+            if (cur + Vector2.down == playerPosition.target) return;
             
             while (true)
             {
@@ -219,7 +215,6 @@ public class LevelManager : MonoBehaviour
         }
         return moveVector;
     }
-    
     
     private void Update()
     {

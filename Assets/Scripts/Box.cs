@@ -9,8 +9,8 @@ public class Box : GridPosition
     //Mainly going to store box properties such as the type, color, letter, etc.
 
 
-    [SerializeField] private BoxPreset preset;
-    [SerializeField] private string letter; 
+    [SerializeField] private BoxPreset preset; 
+    public string letter; 
     private Color color = Color.white;
     private SpriteRenderer _spriteRenderer;
     private TMP_Text _text;
