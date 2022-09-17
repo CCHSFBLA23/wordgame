@@ -176,19 +176,12 @@ public class BoxHandler : MonoBehaviour
             //Checks if the original box pushed is a linked box.
             var originalBox = CheckBoxCollision(_playerPosition.target, moveVector);
             canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+            //todo fix because broken!11!!! for now make it so there are only two linked per screen until fixed.
             if (originalBox.linked && canMoveBoxes)
             {
-                foreach (var box in _linked)
+                foreach (var box in _linked.Where(box => box != originalBox))
                 {
-                    if (box == originalBox) continue;
-                    if (!CheckBoxCollision(box.target, moveVector))
-                    {
-                        PushRowOfBoxes(box.target - moveVector, moveVector);
-                    }
-                    else if(!CheckBoxCollision(box.target, moveVector).linked)
-                    {
-                        PushRowOfBoxes(box.target - moveVector, moveVector);
-                    }
+                    PushRowOfBoxes(box.target - moveVector, moveVector);
                 }
             }
         }
