@@ -21,7 +21,7 @@ public class Box : GridPosition
     [HideInInspector]public bool weak = false; 
     [HideInInspector]public bool falling = false;
     [HideInInspector]public bool moving = false;
-    [HideInInspector] public bool linked = false;
+    [HideInInspector]public bool linked = false;
 
 
     protected override void Start()

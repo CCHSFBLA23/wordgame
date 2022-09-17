@@ -35,8 +35,7 @@ public class BoxHandler : MonoBehaviour
     private void Start()
     {
         playerPosition = player.GetComponent<GridPosition>();
-        
-        
+          
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
         boxes = new Box[boxObjects.Length];
         
@@ -97,7 +96,6 @@ public class BoxHandler : MonoBehaviour
     {
         Box cur;
         var toPush = new List<GridPosition>();
-
         if (CheckBoxCollision(position, moveVector))
         {
             cur = CheckBoxCollision(position, moveVector);
@@ -162,14 +160,14 @@ public class BoxHandler : MonoBehaviour
         
         var moveVector = CalcMoveVector(_inputVector);
         
-        var canMoveBoxes = true;
+        var canMovePlayer = true;
         if (CheckBoxCollision(playerPosition.target, moveVector))
         {
             //Checks if the original box pushed is a linked box.
             var originalBox = CheckBoxCollision(playerPosition.target, moveVector);
-            canMoveBoxes = PushRowOfBoxes(playerPosition.target, moveVector);
-            //todo fix because broken!11!!! for now make it so there are only two linked per screen until fixed.
-            if (originalBox.linked && canMoveBoxes)
+            canMovePlayer = PushRowOfBoxes(playerPosition.target, moveVector);
+            //todo fix because broken!!!!!! for now make it so there are only two linked per screen until fixed.
+            if (originalBox.linked && canMovePlayer)
             {
                 foreach (var box in _linked.Where(box => box != originalBox))
                 {
@@ -177,9 +175,8 @@ public class BoxHandler : MonoBehaviour
                 }
             }
         }
-        
 
-        if (!CheckWallCollisions(playerPosition.target, moveVector) && canMoveBoxes)
+        if (!CheckWallCollisions(playerPosition.target, moveVector) && canMovePlayer)
         {
             PullRowOfBoxes(playerPosition.target, moveVector);
             playerPosition.target += moveVector;
@@ -187,7 +184,6 @@ public class BoxHandler : MonoBehaviour
     }
     private void CalculateFallingMovement()
     {
-        
         foreach (var box in _falling)
         {
             
