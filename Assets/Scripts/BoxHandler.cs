@@ -11,7 +11,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 
-public class LevelManager : MonoBehaviour
+public class BoxHandler : MonoBehaviour
 {
     //Mainly where I am planning to work on most of the game physics.
     //could possibly break into separate classes, but I think it would just be annoying to maintain
@@ -19,10 +19,11 @@ public class LevelManager : MonoBehaviour
     //Game Objects
     public GameObject player;
     //Box lists for each type that needs it.
-    private Box[] _boxes;
+    [HideInInspector]public Box[] boxes;
     private List<Box> _falling = new List<Box>();
     private List<Box> _linked = new List<Box>();
-    
+
+    private LevelHandler _levelHandler;
     private GridPosition _playerPosition;
     public Tilemap walls;
     
@@ -38,23 +39,25 @@ public class LevelManager : MonoBehaviour
         startingLocations[_playerPosition] = _playerPosition.target;
         
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
-        _boxes = new Box[boxObjects.Length];
+        boxes = new Box[boxObjects.Length];
         
         for (int i = 0; i < boxObjects.Length; i++)
         {
-            _boxes[i] = boxObjects[i].GetComponent<Box>();
+            boxes[i] = boxObjects[i].GetComponent<Box>();
             //Sets starting positions for each of the boxes.
-            startingLocations[_boxes[i]] = _boxes[i].target;
+            startingLocations[boxes[i]] = boxes[i].target;
             //Adds boxes of type in to list.
-            if (_boxes[i].falling)
+            if (boxes[i].falling)
             {
-                _falling.Add(_boxes[i]);
+                _falling.Add(boxes[i]);
             }
-            if (_boxes[i].linked)
+            if (boxes[i].linked)
             {
-                _linked.Add(_boxes[i]);
+                _linked.Add(boxes[i]);
             }
         }
+
+        _levelHandler = GetComponent<LevelHandler>();
     }
     //Moves back to beginning. Stores them in dictionary in the start.
     public void Reset()
@@ -80,9 +83,9 @@ public class LevelManager : MonoBehaviour
     
     //Checks if there is a box in the scene that is at the position that is about to be moved to.
     //Returns either a reference to the object or null.
-    private Box CheckBoxCollision(Vector2 position, Vector2 moveVector)
+    public Box CheckBoxCollision(Vector2 position, Vector2 moveVector)
     {
-        foreach (var t in _boxes)
+        foreach (var t in boxes)
         {
             if (t.target == position + moveVector)
             {
@@ -175,9 +178,17 @@ public class LevelManager : MonoBehaviour
             canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
             if (originalBox.linked && canMoveBoxes)
             {
-                foreach (var box in _linked.Where(box => box != originalBox))
+                foreach (var box in _linked)
                 {
-                    PushRowOfBoxes(box.target - moveVector, moveVector);
+                    if (box == originalBox) continue;
+                    if (!CheckBoxCollision(box.target, moveVector))
+                    {
+                        PushRowOfBoxes(box.target - moveVector, moveVector);
+                    }
+                    else if(!CheckBoxCollision(box.target, moveVector).linked)
+                    {
+                        PushRowOfBoxes(box.target - moveVector, moveVector);
+                    }
                 }
             }
         }
@@ -219,7 +230,6 @@ public class LevelManager : MonoBehaviour
         }
         return moveVector;
     }
-    
     
     private void Update()
     {
