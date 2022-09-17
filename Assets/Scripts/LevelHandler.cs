@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using TMPro;
 using UnityEngine;
 
 public class LevelHandler : MonoBehaviour
@@ -14,11 +10,9 @@ public class LevelHandler : MonoBehaviour
     private Dictionary<GridPosition, Vector2> _startingLocations = new Dictionary<GridPosition, Vector2>();
     
     public bool solved = false;
-    private Stopwatch _timer = new Stopwatch();
-    [SerializeField] private TMP_Text timerText;
+
     private void Start()
     {
-        _timer.Start();
         _boxHandler = GetComponent<BoxHandler>();
         _startingLocations[_boxHandler.playerPosition] = _boxHandler.playerPosition.target;
         foreach (var box in _boxHandler.boxes)
@@ -35,23 +29,9 @@ public class LevelHandler : MonoBehaviour
         }
         solved = false;
     }
-
-    private void UpdateTimer()
-    {
-        TimeSpan timeElapsed = _timer.Elapsed;
-        timerText.text = timeElapsed.ToString(@"m\:ss");
-    }
     
     private void Update()
-    {
-        if (solved)
-        {
-            _timer.Stop();
-            return;
-        }
-
-        UpdateTimer();
-        
+    {    
         foreach (var startBox in _boxHandler.boxes)
         {
             if (!_boxHandler.CheckBoxCollision(startBox.target, Vector2.up) && _boxHandler.CheckBoxCollision(startBox.target, Vector2.down))
