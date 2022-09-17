@@ -147,6 +147,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80ccd9fe-ce82-4045-93c5-fe67e2ba8ae5",
+                    "path": "<HID::USB,2-axis 8-button gamepad  >/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
