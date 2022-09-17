@@ -200,6 +200,7 @@ public class BoxHandler : MonoBehaviour
                 
                 if (CheckWallCollisions(cur, Vector2.down)) break;
                 if (CheckBoxCollision(cur, Vector2.down)) break;
+                if (playerPosition.target == cur + Vector2.down) break;
                 
                 cur += Vector2.down;
             }

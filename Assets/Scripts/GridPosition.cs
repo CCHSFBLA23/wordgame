@@ -19,6 +19,7 @@ public class GridPosition : MonoBehaviour
     {
         var position = transform.position;
         target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
+        transform.position = target;
         current = target;
     }
 
