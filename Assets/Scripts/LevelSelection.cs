@@ -11,6 +11,7 @@ public class LevelSelection : MonoBehaviour
 
     void Awake()
     {
+        levelCount = SceneManager.sceneCountInBuildSettings - 1;
         // Loop for as many times as there are levels, add the necessary functions and labels.
         for (int i = 1; i <= levelCount; i++)
         {
