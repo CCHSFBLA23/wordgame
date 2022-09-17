@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
 public class LevelHandler : MonoBehaviour
@@ -13,7 +14,8 @@ public class LevelHandler : MonoBehaviour
     private Dictionary<GridPosition, Vector2> _startingLocations = new Dictionary<GridPosition, Vector2>();
     
     public bool solved = false;
-    public Stopwatch _timer = new Stopwatch();
+    private Stopwatch _timer = new Stopwatch();
+    [SerializeField] private TMP_Text timerText;
     private void Start()
     {
         _timer.Start();
@@ -27,17 +29,28 @@ public class LevelHandler : MonoBehaviour
 
     public void Reset()
     {
-        _timer.Stop();
         foreach (var pair in _startingLocations)
         {
             pair.Key.target = pair.Value;
         }
         solved = false;
     }
+
+    private void UpdateTimer()
+    {
+        TimeSpan timeElapsed = _timer.Elapsed;
+        timerText.text = timeElapsed.ToString(@"m\:ss");
+    }
     
     private void Update()
     {
-        if (solved) return;
+        if (solved)
+        {
+            _timer.Stop();
+            return;
+        }
+
+        UpdateTimer();
         
         foreach (var startBox in _boxHandler.boxes)
         {
