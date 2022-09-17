@@ -24,19 +24,18 @@ public class BoxHandler : MonoBehaviour
     private List<Box> _linked = new List<Box>();
 
     private LevelHandler _levelHandler;
-    private GridPosition _playerPosition;
+    [HideInInspector]public GridPosition playerPosition;
     public Tilemap walls;
     
     //Input Manager
     private Vector2 _inputVector;
     
-    //Reset Function
-    private Dictionary<GridPosition, Vector2> startingLocations = new Dictionary<GridPosition, Vector2>();
+
 
     private void Start()
     {
-        _playerPosition = player.GetComponent<GridPosition>();
-        startingLocations[_playerPosition] = _playerPosition.target;
+        playerPosition = player.GetComponent<GridPosition>();
+        
         
         GameObject[] boxObjects = GameObject.FindGameObjectsWithTag("box");
         boxes = new Box[boxObjects.Length];
@@ -45,7 +44,6 @@ public class BoxHandler : MonoBehaviour
         {
             boxes[i] = boxObjects[i].GetComponent<Box>();
             //Sets starting positions for each of the boxes.
-            startingLocations[boxes[i]] = boxes[i].target;
             //Adds boxes of type in to list.
             if (boxes[i].falling)
             {
@@ -60,13 +58,7 @@ public class BoxHandler : MonoBehaviour
         _levelHandler = GetComponent<LevelHandler>();
     }
     //Moves back to beginning. Stores them in dictionary in the start.
-    public void Reset()
-    {
-        foreach (var pair in startingLocations)
-        {
-            pair.Key.target = pair.Value;
-        }
-    }
+    
     private void OnMove(InputValue value)
     {
         _inputVector = value.Get<Vector2>();
@@ -166,16 +158,16 @@ public class BoxHandler : MonoBehaviour
     //Checks walls and the box pushing stuff above.
     private void CalculateMovementPlayer()
     {
-        if (!(Vector2.Distance(_playerPosition.current, _playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
+        if (!(Vector2.Distance(playerPosition.current, playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
         
         var moveVector = CalcMoveVector(_inputVector);
         
         var canMoveBoxes = true;
-        if (CheckBoxCollision(_playerPosition.target, moveVector))
+        if (CheckBoxCollision(playerPosition.target, moveVector))
         {
             //Checks if the original box pushed is a linked box.
-            var originalBox = CheckBoxCollision(_playerPosition.target, moveVector);
-            canMoveBoxes = PushRowOfBoxes(_playerPosition.target, moveVector);
+            var originalBox = CheckBoxCollision(playerPosition.target, moveVector);
+            canMoveBoxes = PushRowOfBoxes(playerPosition.target, moveVector);
             //todo fix because broken!11!!! for now make it so there are only two linked per screen until fixed.
             if (originalBox.linked && canMoveBoxes)
             {
@@ -187,10 +179,10 @@ public class BoxHandler : MonoBehaviour
         }
         
 
-        if (!CheckWallCollisions(_playerPosition.target, moveVector) && canMoveBoxes)
+        if (!CheckWallCollisions(playerPosition.target, moveVector) && canMoveBoxes)
         {
-            PullRowOfBoxes(_playerPosition.target, moveVector);
-            _playerPosition.target += moveVector;
+            PullRowOfBoxes(playerPosition.target, moveVector);
+            playerPosition.target += moveVector;
         }
     }
     private void CalculateFallingMovement()
@@ -201,7 +193,7 @@ public class BoxHandler : MonoBehaviour
             
             if(Vector2.Distance(box.target, box.current) > 0.1f) return;
             Vector2 cur = box.target;
-            if (cur + Vector2.down == _playerPosition.target) return;
+            if (cur + Vector2.down == playerPosition.target) return;
             
             while (true)
             {

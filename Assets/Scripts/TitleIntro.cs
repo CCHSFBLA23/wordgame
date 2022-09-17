@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class TitleIntro : MonoBehaviour
@@ -11,7 +12,6 @@ public class TitleIntro : MonoBehaviour
     public Vector2 playerTargetInit;
     public Vector2 playerTargetFinal;
     private RectTransform playerTransform;
-
     private void Start()
     {
         titlePiecesTransform = titlePieces.GetComponent<RectTransform>();
