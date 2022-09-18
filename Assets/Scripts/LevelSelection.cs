@@ -9,7 +9,7 @@ public class LevelSelection : MonoBehaviour
     
     public GameObject levelButton;
 
-    void Awake()
+    private void Awake()
     {
         levelCount = SceneManager.sceneCountInBuildSettings - 1;
         // Loop for as many times as there are levels, add the necessary functions and labels.
@@ -22,7 +22,7 @@ public class LevelSelection : MonoBehaviour
         }
     }
 
-    void GoToLevel(int levelIndex)
+    private void GoToLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
     }
