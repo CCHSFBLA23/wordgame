@@ -1,5 +1,5 @@
-using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleIntro : MonoBehaviour
 {
@@ -8,12 +8,36 @@ public class TitleIntro : MonoBehaviour
     public Vector2 titleTargetPos;
     private RectTransform titlePiecesTransform;
     public float speed;
+
     [Header("For the Player")]
+    public GameObject player;
     public Vector2 playerTargetInit;
+    public Vector2 playerTargetCenter;
     public Vector2 playerTargetFinal;
     private RectTransform playerTransform;
+
+    [Header("Buttons")]
+    public GameObject playButton;
+    public GameObject settingsButton;
+    public GameObject quitButton;
+
+    [Header("Border")]
+    public GameObject specialBlock;
+    public Color gridColor;
+    public Color borderColor;
+
     private void Start()
     {
+        // reset visibility
+        playButton.SetActive(false);
+        quitButton.SetActive(false);
+        settingsButton.SetActive(false);
+        player.SetActive(true);
+
+        // reset colors
+        specialBlock.GetComponent<Image>().color = gridColor;
+
+        // get positions.
         titlePiecesTransform = titlePieces.GetComponent<RectTransform>();
         playerTransform = titlePieces.transform.GetChild(0).GetComponent<RectTransform>();
     }
@@ -31,10 +55,23 @@ public class TitleIntro : MonoBehaviour
             {
                 playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetInit, speed);
             }
-            else // move player to the right and off screen
+            else if (playerTransform.anchoredPosition.x < playerTargetCenter.x) // move the player to the center right
             {
-                playerTargetFinal.y = playerTransform.anchoredPosition.y;
+                playerTargetCenter.y = playerTransform.anchoredPosition.y;
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetCenter, speed);
+            }
+            else if (playerTransform.anchoredPosition.y > playerTargetFinal.y) // move player into the play button position
+            {
+                playerTargetFinal.x = playerTransform.anchoredPosition.x;
                 playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetFinal, speed);
+            }
+            else
+            {
+                player.SetActive(false);
+                playButton.SetActive(true);
+                quitButton.SetActive(true);
+                settingsButton.SetActive(true);
+                specialBlock.GetComponent<Image>().color = borderColor;
             }
         }
     }
