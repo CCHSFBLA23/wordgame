@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelHandler : MonoBehaviour
 {
     [SerializeField] private string goalWord;
+    [SerializeField] private string levelTitle;
     
     private BoxHandler _boxHandler;
     private Dictionary<GridPosition, Vector2> _startingLocations = new Dictionary<GridPosition, Vector2>();
@@ -28,6 +29,11 @@ public class LevelHandler : MonoBehaviour
             pair.Key.target = pair.Value;
         }
         solved = false;
+    }
+
+    public string GetTitle()
+    {
+        return levelTitle;
     }
     
     private void Update()
