@@ -22,19 +22,19 @@ public class TitleIntro : MonoBehaviour
     {
         if (titlePiecesTransform.anchoredPosition.x < titleTargetPos.x) // then move all parts of title
         {
-            titlePiecesTransform.anchoredPosition = Vector2.MoveTowards(titlePiecesTransform.anchoredPosition, titleTargetPos, speed);
+            titlePiecesTransform.anchoredPosition = Vector2.MoveTowards(titlePiecesTransform.anchoredPosition, titleTargetPos, speed * Time.deltaTime);
         }
         else // then move the player
         {
             playerTargetInit.x = playerTransform.anchoredPosition.x;
             if (playerTransform.anchoredPosition.y > playerTargetInit.y) // move player down
             {
-                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetInit, speed);
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetInit, speed * Time.deltaTime);
             }
             else // move player to the right and off screen
             {
                 playerTargetFinal.y = playerTransform.anchoredPosition.y;
-                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetFinal, speed);
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetFinal, speed * Time.deltaTime);
             }
         }
     }

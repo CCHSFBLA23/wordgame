@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
+
 [ExecuteInEditMode]
 public class Box : GridPosition
 {
@@ -15,6 +17,9 @@ public class Box : GridPosition
     private SpriteRenderer _spriteRenderer;
     private TMP_Text _text;
 
+    
+    
+
     [HideInInspector]public bool pushable = true;
     [HideInInspector]public bool pullable = false;
     [HideInInspector]public bool sticky = false;
@@ -25,8 +30,7 @@ public class Box : GridPosition
 
 
     [HideInInspector] public bool linkedMoved = false;
-
-
+    
     protected override void Start()
     {
         base.Start();
@@ -58,4 +62,5 @@ public class Box : GridPosition
         linked = preset.linked;
 
     }
+
 }
