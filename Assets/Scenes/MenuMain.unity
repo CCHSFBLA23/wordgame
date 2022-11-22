@@ -11336,7 +11336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titlePieces: {fileID: 9089494}
   titleTargetPos: {x: 0, y: 0}
-  speed: 1
+  speed: 0.6
   player: {fileID: 867870928}
   playerTargetInit: {x: 0, y: 52.4}
   playerTargetCenter: {x: 0, y: 0}
