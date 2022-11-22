@@ -35,7 +35,7 @@ public class TitleIntro : MonoBehaviour
         player.SetActive(true);
 
         // reset colors
-        specialBlock.GetComponent<Image>().color = gridColor;
+        //specialBlock.GetComponent<Image>().color = gridColor;
 
         // get positions.
         titlePiecesTransform = titlePieces.GetComponent<RectTransform>();
@@ -46,24 +46,24 @@ public class TitleIntro : MonoBehaviour
     {
         if (titlePiecesTransform.anchoredPosition.x < titleTargetPos.x) // then move all parts of title
         {
-            titlePiecesTransform.anchoredPosition = Vector2.MoveTowards(titlePiecesTransform.anchoredPosition, titleTargetPos, speed);
+            titlePiecesTransform.anchoredPosition = Vector2.MoveTowards(titlePiecesTransform.anchoredPosition, titleTargetPos, speed * Time.deltaTime);
         }
         else // then move the player
         {
             playerTargetInit.x = playerTransform.anchoredPosition.x;
             if (playerTransform.anchoredPosition.y > playerTargetInit.y) // move player down
             {
-                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetInit, speed);
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetInit, speed * Time.deltaTime);
             }
             else if (playerTransform.anchoredPosition.x < playerTargetCenter.x) // move the player to the center right
             {
                 playerTargetCenter.y = playerTransform.anchoredPosition.y;
-                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetCenter, speed);
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetCenter, speed * Time.deltaTime);
             }
             else if (playerTransform.anchoredPosition.y > playerTargetFinal.y) // move player into the play button position
             {
                 playerTargetFinal.x = playerTransform.anchoredPosition.x;
-                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetFinal, speed);
+                playerTransform.anchoredPosition = Vector2.MoveTowards(playerTransform.anchoredPosition, playerTargetFinal, speed * Time.deltaTime);
             }
             else
             {
@@ -71,7 +71,7 @@ public class TitleIntro : MonoBehaviour
                 playButton.SetActive(true);
                 quitButton.SetActive(true);
                 settingsButton.SetActive(true);
-                specialBlock.GetComponent<Image>().color = borderColor;
+                //specialBlock.GetComponent<Image>().color = borderColor;
             }
         }
     }
