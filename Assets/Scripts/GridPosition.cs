@@ -14,7 +14,6 @@ public class GridPosition : MonoBehaviour
     public Vector2 target;
     [SerializeField] private float moveSpeed = 20f;
 
-
     private void Awake()
     {
         var position = transform.position;
