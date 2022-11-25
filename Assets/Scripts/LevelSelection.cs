@@ -9,6 +9,8 @@ public class LevelSelection : MonoBehaviour
     
     public GameObject levelButton;
 
+    public SceneHandler sceneHandler;
+
     private void Awake()
     {
         levelCount = SceneManager.sceneCountInBuildSettings - 1;
@@ -24,6 +26,6 @@ public class LevelSelection : MonoBehaviour
 
     private void GoToLevel(int levelIndex)
     {
-        SceneManager.LoadScene(levelIndex);
+        sceneHandler.LoadScene(levelIndex);
     }
 }
