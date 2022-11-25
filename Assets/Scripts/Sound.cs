@@ -9,7 +9,7 @@ public class Sound
 
     [Range(0f, 1.0f)]
     public float volume;
-    [Range(0f, 100f)]
+    [Range(-3f, 3f)]
     public float pitch;
 
     [HideInInspector]
