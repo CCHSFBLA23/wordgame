@@ -12,20 +12,33 @@ public class LevelHandler : MonoBehaviour
     private Dictionary<GridPosition, Vector2> _startingLocations = new Dictionary<GridPosition, Vector2>();
     
     public bool solved = false;
-
+    private bool _firstSolved = false;
     [Header("Score Stuff")]
     public Timer timer;
     public int buildIndex;
+    public bool debugResetOnStart = false;
+
+    private LevelEndController _levelEndController;
+    private SceneHandler _sceneHandler;
 
     private void Start()
     {
         buildIndex = SceneManager.GetActiveScene().buildIndex;
+        //Doing this because I am too lazy to add a custom inspector button
+        if (debugResetOnStart)
+        {
+            SaveSystem.DeleteSaveFile(this);
+        }
+        
         _boxHandler = GetComponent<BoxHandler>();
         _startingLocations[_boxHandler.playerPosition] = _boxHandler.playerPosition.target;
         foreach (var box in _boxHandler.boxes)
         {
             _startingLocations[box] = box.target;
         }
+
+        _levelEndController = GetComponent<LevelEndController>();
+        _sceneHandler = GetComponent<SceneHandler>();
     }
 
     public void Reset()
@@ -58,6 +71,10 @@ public class LevelHandler : MonoBehaviour
                 }
                 if (string.Equals(currentString, goalWord, StringComparison.CurrentCultureIgnoreCase))
                 {
+                    if (!solved)
+                    {
+                        OnSolve();
+                    }
                     solved = true;
                 }
             }
@@ -74,19 +91,24 @@ public class LevelHandler : MonoBehaviour
                 }
                 if (string.Equals(currentString, goalWord, StringComparison.CurrentCultureIgnoreCase))
                 {
+                    if (!solved)
+                    {
+                        OnSolve();
+                    }
                     solved = true;
                 }
             }
         }
-
-        // Level Beat
-        if (solved)
-        {
-            UpdateBestScore();
-            Debug.Log("level beat");
-        }
     }
 
+
+    private void OnSolve()
+    {
+        UpdateBestScore();
+        timer.Pause();
+        _levelEndController.Enable();
+        Debug.Log("level beat");
+    }
     // For Save System
     public void UpdateBestScore()
     {

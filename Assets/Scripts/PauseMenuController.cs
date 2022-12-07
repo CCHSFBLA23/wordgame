@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject _PauseCanvasParent;
     [SerializeField] private Timer timer;
     [SerializeField] private LevelHandler levelHandler;
+    private bool _paused;
     
     public void OpenPauseMenu()
     {
+        _paused = true;
         _PauseCanvasParent.SetActive(true);
         Populate(levelHandler.GetTitle(), timer.GetTimerText());
         timer.Pause();
@@ -26,11 +29,24 @@ public class PauseMenuController : MonoBehaviour
         _PauseCanvasParent.SetActive(false);
         timer.Unpause();
         Time.timeScale = 1.0f;
+        _paused = false;
     }
 
     private void Populate(string levelName, string curTime)
     {
         title.text = levelName;
         time.text = curTime;
+    }
+
+    private void OnPause(InputValue value)
+    {
+        if (!_paused)
+        {
+            OpenPauseMenu();
+        }
+        else
+        {
+            ClosePauseMenu();
+        }
     }
 }
