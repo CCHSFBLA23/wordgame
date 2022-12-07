@@ -7,9 +7,10 @@ public class Timer : MonoBehaviour
 {
     [Header("Text")]
     [SerializeField] private TMP_Text timerText;
-    private Stopwatch _timer = new Stopwatch();
+    public Stopwatch _timer = new Stopwatch();
     private string _timerString;
     public LevelHandler levelHandler;
+    TimeSpan timeElapsed;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimer()
     {
-        TimeSpan timeElapsed = _timer.Elapsed;
+        timeElapsed = _timer.Elapsed;
         _timerString = timeElapsed.ToString(@"mm\:ss");
         timerText.text = _timerString;
         if (timerText.text == "99:59")
@@ -40,6 +41,11 @@ public class Timer : MonoBehaviour
     public void Unpause()
     {
         _timer.Start();
+    }
+
+    public double GetTimerSeconds()
+    {
+        return timeElapsed.TotalSeconds;
     }
     
     private void Update()

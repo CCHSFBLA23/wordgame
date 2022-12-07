@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelHandler : MonoBehaviour
 {
@@ -12,8 +13,13 @@ public class LevelHandler : MonoBehaviour
     
     public bool solved = false;
 
+    [Header("Score Stuff")]
+    public Timer timer;
+    public int buildIndex;
+
     private void Start()
     {
+        buildIndex = SceneManager.GetActiveScene().buildIndex;
         _boxHandler = GetComponent<BoxHandler>();
         _startingLocations[_boxHandler.playerPosition] = _boxHandler.playerPosition.target;
         foreach (var box in _boxHandler.boxes)
@@ -72,6 +78,33 @@ public class LevelHandler : MonoBehaviour
                 }
             }
         }
+
+        // Level Beat
+        if (solved)
+        {
+            UpdateBestScore();
+            Debug.Log("level beat");
+        }
     }
-    
+
+    // For Save System
+    public void UpdateBestScore()
+    {
+        double currentAttempt = timer.GetTimerSeconds();
+        LevelData savedScore = SaveSystem.LoadLevelData(this);
+
+        if (savedScore != null)
+        {
+            if (savedScore.seconds > currentAttempt)
+            {
+                SaveSystem.SaveLevelData(this);
+                Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(this).ToString(@"mm\:ss"));
+            }
+        }
+        else
+        {
+            SaveSystem.SaveLevelData(this);
+            Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(this).ToString(@"mm\:ss"));
+        }
+    }
 }
