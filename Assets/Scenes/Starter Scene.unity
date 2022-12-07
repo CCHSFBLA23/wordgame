@@ -2139,6 +2139,8 @@ MonoBehaviour:
   goalWord: cat
   levelTitle: EPIC FIRST LEVEL TEST
   solved: 0
+  timer: {fileID: 969014989}
+  buildIndex: 0
 --- !u!114 &1204811741
 MonoBehaviour:
   m_ObjectHideFlags: 0
