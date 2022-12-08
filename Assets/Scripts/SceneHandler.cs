@@ -18,6 +18,11 @@ public class SceneHandler : MonoBehaviour
         StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
+    public void ReloadScene()
+    {
+        StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex));
+    }
+
     IEnumerator transition(int levelIndex)
     {
         transitionAnim.SetTrigger("Start");

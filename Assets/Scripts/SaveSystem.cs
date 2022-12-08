@@ -30,11 +30,8 @@ public static class SaveSystem
 
             return levelData;
         }
-        else
-        {
-            Debug.LogError("Save file at the path: '" + path + "' was not found.");
-            return null;
-        }
+        Debug.LogError("Save file at the path: '" + path + "' was not found.");
+        return null;
     }
 
     public static TimeSpan LoadLevelScore(LevelHandler levelHandler)
