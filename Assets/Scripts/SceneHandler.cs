@@ -10,12 +10,18 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadScene(int index)
     {
-        StartCoroutine(transition(index));
+        if (index <= SceneManager.sceneCount)
+            StartCoroutine(transition(index));
+        else
+            Debug.LogWarning("There is no scene with the index: " + index.ToString() + "!");
     }
 
     public void LoadNextScene()
     {
-        StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
+        if (SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCount)
+            StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
+        else
+            Debug.LogWarning("There is not a scene with an index higher than the current index of: " + SceneManager.GetActiveScene().buildIndex.ToString() + "!");
     }
 
     public void ReloadScene()
@@ -30,5 +36,11 @@ public class SceneHandler : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
 
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public IEnumerator delay(float length, Action functionToDelay)
+    {
+        yield return new WaitForSeconds(length);
+        functionToDelay();
     }
 }

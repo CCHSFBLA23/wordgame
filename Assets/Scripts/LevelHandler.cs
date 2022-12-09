@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LevelHandler : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class LevelHandler : MonoBehaviour
     
     public bool solved = false;
     private bool _firstSolved = false;
+
     [Header("Score Stuff")]
     public Timer timer;
     public int buildIndex;
@@ -23,6 +25,7 @@ public class LevelHandler : MonoBehaviour
 
     private void Start()
     {
+        togglePlayerInput(true);
         buildIndex = SceneManager.GetActiveScene().buildIndex;
         //Doing this because I am too lazy to add a custom inspector button
         if (debugResetOnStart)
@@ -106,9 +109,19 @@ public class LevelHandler : MonoBehaviour
     {
         UpdateBestScore();
         timer.Pause();
-        _levelEndController.Enable();
+        togglePlayerInput(false);
+        StartCoroutine(_sceneHandler.delay(0.4f, () => _levelEndController.Enable()));
         Debug.Log("level beat");
     }
+
+    public void togglePlayerInput(bool setActive)
+    {
+        if (setActive)
+            GetComponent<PlayerInput>().ActivateInput();
+        else
+            GetComponent<PlayerInput>().DeactivateInput();
+    }
+
     // For Save System
     public void UpdateBestScore()
     {

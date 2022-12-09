@@ -21,15 +21,15 @@ public class PauseMenuController : MonoBehaviour
         _PauseCanvasParent.SetActive(true);
         Populate(levelHandler.GetTitle(), timer.GetTimerText());
         timer.Pause();
-        Time.timeScale = 0.0f;
+        levelHandler.togglePlayerInput(true);
     }
 
     public void ClosePauseMenu()
     { 
         _PauseCanvasParent.SetActive(false);
         timer.Unpause();
-        Time.timeScale = 1.0f;
         _paused = false;
+        levelHandler.togglePlayerInput(false);
     }
 
     private void Populate(string levelName, string curTime)

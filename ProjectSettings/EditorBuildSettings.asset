@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Starter Scene.unity
     guid: f552fa1847ef82f49b74f64077b5dba0
-  - enabled: 1
-    path: Assets/Scenes/LinkedTestScene.unity
-    guid: 0db7792b53d8c7e4db139bf0d559e48d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
