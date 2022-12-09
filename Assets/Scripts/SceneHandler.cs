@@ -10,12 +10,14 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadScene(int index)
     {
-        StartCoroutine(transition(index));
+        if (index <= SceneManager.sceneCount)
+            StartCoroutine(transition(index));
     }
 
     public void LoadNextScene()
     {
-        StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
+        if (SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCount)
+            StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     public void ReloadScene()
