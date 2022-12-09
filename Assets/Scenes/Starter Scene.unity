@@ -3101,6 +3101,7 @@ MonoBehaviour:
   timer: {fileID: 969014989}
   buildIndex: 0
   debugResetOnStart: 0
+  player: {fileID: 1784746761}
 --- !u!114 &1204811741
 MonoBehaviour:
   m_ObjectHideFlags: 0
