@@ -163,6 +163,7 @@ public class BoxHandler : MonoBehaviour
         {
             if (!(Vector2.Distance(playerPosition.current, playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
         
+            
             var moveVector = CalcMoveVector(_inputVector);
         
             var canMovePlayer = true;
@@ -177,6 +178,7 @@ public class BoxHandler : MonoBehaviour
             {
                 PullRowOfBoxes(playerPosition.target, moveVector);
                 playerPosition.target += moveVector;
+                //TODO: PUT IT HERE
             }
         }
         private void CalculateFallingMovement()

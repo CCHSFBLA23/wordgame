@@ -34,6 +34,23 @@ public static class SaveSystem
         return null;
     }
 
+    public static LevelData LoadLevelDataThroughBuildIndex(int index)
+    {
+        string path = Application.persistentDataPath + "/level" + index + ".data";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            LevelData levelData = formatter.Deserialize(stream) as LevelData;
+            stream.Close();
+
+            return levelData;
+        }
+        Debug.LogError("Save file at the path: '" + path + "' was not found.");
+        return null;
+    }
+
     public static TimeSpan LoadLevelScore(LevelHandler levelHandler)
     {
         double seconds = LoadLevelData(levelHandler).seconds;
