@@ -10,7 +10,7 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadScene(int index)
     {
-        if (index <= SceneManager.sceneCount)
+        if (index <= SceneManager.sceneCountInBuildSettings)
             StartCoroutine(transition(index));
         else
             Debug.LogWarning("There is no scene with the index: " + index.ToString() + "!");
@@ -18,7 +18,7 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCount)
+        if (SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCountInBuildSettings)
             StartCoroutine(transition(SceneManager.GetActiveScene().buildIndex + 1));
         else
             Debug.LogWarning("There is not a scene with an index higher than the current index of: " + SceneManager.GetActiveScene().buildIndex.ToString() + "!");
