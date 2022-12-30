@@ -8,9 +8,9 @@ public class Sound
     public AudioClip clip;
 
     [Range(0f, 1.0f)]
-    public float volume;
-    [Range(-3f, 3f)]
-    public float pitch;
+    public float volume = 1f;
+    [Range(0f, 5f)]
+    public float pitch = 1f;
 
     [HideInInspector]
     public AudioSource source;
