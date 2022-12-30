@@ -2566,12 +2566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aad8d2f4d9e574eb363a731efac2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: PlayerMove
-    clip: {fileID: 8300000, guid: bd5e1097a99ca5945817c28f16f940ca, type: 3}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
+  references: {fileID: 11400000, guid: c415cd379eedbdb4d8299b6e81efdd9c, type: 2}
 --- !u!1 &1068584564
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,7 +3095,7 @@ MonoBehaviour:
   solved: 0
   timer: {fileID: 969014989}
   buildIndex: 0
-  debugResetOnStart: 1
+  debugResetOnStart: 0
 --- !u!114 &1204811741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5907,6 +5902,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1008052323}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1763808384
