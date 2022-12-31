@@ -27,67 +27,67 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: MenuMusic
     clip: {fileID: 8300000, guid: e6267bf8bbc9467bbeeb7e12dfdf7051, type: 3}
-    volume: 0.8
+    volume: 0.469
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 1
     clip: {fileID: 8300000, guid: b69d053073f34c9e87874d5c0ae8efc6, type: 3}
-    volume: 1
+    volume: 0.527
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 2
     clip: {fileID: 8300000, guid: 1d4924834db9406e9f6f3e073b5f113f, type: 3}
-    volume: 1
+    volume: 0.497
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 3
     clip: {fileID: 8300000, guid: 3a44f3be68644d88820378a96cd36201, type: 3}
-    volume: 1
+    volume: 0.467
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 4
     clip: {fileID: 8300000, guid: 8736af2369f9425db4616db4d26345f2, type: 3}
-    volume: 1
+    volume: 0.467
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 5
     clip: {fileID: 8300000, guid: 79e339d9a9244153a42332b700d17764, type: 3}
-    volume: 1
+    volume: 0.504
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 6
     clip: {fileID: 8300000, guid: c12c2d8a9e0c4858896d5992fe132899, type: 3}
-    volume: 1
+    volume: 0.497
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 7
     clip: {fileID: 8300000, guid: fc8aeddcf7614a2282aa8265f438e821, type: 3}
-    volume: 1
+    volume: 0.602
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 8
     clip: {fileID: 8300000, guid: ba31577cc14b4de9bb7a675d26719e9a, type: 3}
-    volume: 1
+    volume: 0.564
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 9
     clip: {fileID: 8300000, guid: 02840102ccb84e89b2867afcd28ce7d5, type: 3}
-    volume: 1
+    volume: 0.527
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Level 10
     clip: {fileID: 8300000, guid: 475b2e26b53f49c8bfdabe92e187a1e5, type: 3}
-    volume: 1
+    volume: 0.549
     pitch: 1
     loop: 1
     source: {fileID: 0}
