@@ -40,6 +40,7 @@ public class TitleIntro : MonoBehaviour
         // get positions.
         titlePiecesTransform = titlePieces.GetComponent<RectTransform>();
         playerTransform = titlePieces.transform.GetChild(0).GetComponent<RectTransform>();
+        AudioManager.Play("MenuMusic");
     }
 
     void Update()

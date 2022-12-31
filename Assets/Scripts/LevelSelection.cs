@@ -33,7 +33,9 @@ public class LevelSelection : MonoBehaviour
             GameObject button = Instantiate(levelButton, this.transform);
             button.GetComponentInChildren<TMP_Text>().text = i.ToString();
             int childIndex = button.transform.GetSiblingIndex() + 1;
+            button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
             button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(childIndex));
+            
         }
         
     }
