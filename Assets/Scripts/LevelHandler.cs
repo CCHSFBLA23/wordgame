@@ -27,6 +27,7 @@ public class LevelHandler : MonoBehaviour
     {
         togglePlayerInput(true);
         buildIndex = SceneManager.GetActiveScene().buildIndex;
+        AudioManager.Play($"Level {buildIndex}");
         //Doing this because I am too lazy to add a custom inspector button
         if (debugResetOnStart)
         {
@@ -110,6 +111,7 @@ public class LevelHandler : MonoBehaviour
         UpdateBestScore();
         timer.Pause();
         togglePlayerInput(false);
+        AudioManager.Play("LevelComplete");
         StartCoroutine(_sceneHandler.delay(0.4f, () => _levelEndController.Enable()));
         Debug.Log("level beat");
     }

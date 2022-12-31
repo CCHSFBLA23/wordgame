@@ -11,9 +11,13 @@ public class SceneHandler : MonoBehaviour
     public void LoadScene(int index)
     {
         if (index <= SceneManager.sceneCountInBuildSettings)
+        {
             StartCoroutine(transition(index));
+        }
         else
+        {
             Debug.LogWarning("There is no scene with the index: " + index.ToString() + "!");
+        }
     }
 
     public void LoadNextScene()

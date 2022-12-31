@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
         }
     }
 
@@ -27,17 +28,16 @@ public class AudioManager : MonoBehaviour
     // The common usage will look like the following:
     // AudioManager.Play("PlayerMove");
 
-    public static void Play(string name)
+    public static void Play(string title)
     {
-        Sound s;
         try
         {
-            s = Array.Find(soundRecords, sound => sound.name == name);
+            Sound s = Array.Find(soundRecords, sound => sound.name == title);
             s.source.Play();
         }
         catch
         {
-            Debug.Log("The sound: " + name + " does not exist.");
+            Debug.Log("The sound: " + title + " does not exist.");
         }
     }
 }

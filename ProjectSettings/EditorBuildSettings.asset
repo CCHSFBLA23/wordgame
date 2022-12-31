@@ -11,16 +11,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Starter Scene.unity
     guid: f552fa1847ef82f49b74f64077b5dba0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Starter Scene 1.unity
-    guid: b948cbb94d47bff40abe21e6cdfe7a90
+    guid: 29ff16b8dc2206d4285ce0b0d1d40a72
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 3.unity
+    guid: 228be7c416781024a85f641408522e6d
   - enabled: 1
     path: Assets/Scenes/Starter Scene 2.unity
-    guid: 21521874907a75a43b1b8573c2c143b3
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: 699980a4a6a3a484399b49e946ed9dab
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 4.unity
+    guid: d8cda841fdc56b144a0c9c02764e94bd
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 6.unity
+    guid: 9c2e1110ece09d348b659b12b5212885
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 8.unity
+    guid: 91ff552b2ba2b7a49b75752da9b11b8c
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 7.unity
+    guid: 396c6e2f3103b54478384a034638e5b3
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 9.unity
+    guid: 77c5d04d927f6524b94e91d2a1429705
+  - enabled: 1
+    path: Assets/Scenes/Starter Scene 5.unity
+    guid: c9dcebc218889dd429dd345d89807ae5
   m_configObjects: {}
