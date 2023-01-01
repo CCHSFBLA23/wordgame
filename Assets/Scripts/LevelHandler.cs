@@ -28,10 +28,10 @@ public class LevelHandler : MonoBehaviour
         togglePlayerInput(true);
         buildIndex = SceneManager.GetActiveScene().buildIndex;
         AudioManager.Play($"Level {buildIndex}");
-        //Doing this because I am too lazy to add a custom inspector button
+        // Doing this because I am too lazy to add a custom inspector button
         if (debugResetOnStart)
         {
-            SaveSystem.DeleteSaveFile(this);
+            SaveSystem.DeleteLevelSaveFile(this);
         }
         
         _boxHandler = GetComponent<BoxHandler>();

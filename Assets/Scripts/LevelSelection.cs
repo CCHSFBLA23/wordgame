@@ -12,10 +12,8 @@ public class LevelSelection : MonoBehaviour
     public GameObject levelButton;
     public SceneHandler sceneHandler;
 
-
     private void Awake()
-    {
-        
+    { 
         levelCount = SceneManager.sceneCountInBuildSettings - 1;
         List<int> availableLevels = new List<int> { 1 };
         for(int index = 2; index <= levelCount; index++)

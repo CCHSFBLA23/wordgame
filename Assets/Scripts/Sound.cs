@@ -11,8 +11,10 @@ public class Sound
     public float volume = 1f;
     [Range(0f, 5f)]
     public float pitch = 1f;
-
+    
+    public bool isMusic;
     public bool loop;
+
     [HideInInspector]
     public AudioSource source;
 }
