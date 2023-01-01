@@ -5,6 +5,7 @@ using System;
 
 public static class SaveSystem
 {
+    // For Level Data
     public static void SaveLevelData(LevelHandler levelHandler)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -57,8 +58,8 @@ public static class SaveSystem
         return TimeSpan.FromSeconds(seconds);
     }
 
-    // For Debugging
-    public static void DeleteSaveFile(LevelHandler levelHandler)
+    // For Debugging Level Save Data
+    public static void DeleteLevelSaveFile(LevelHandler levelHandler)
     {
         string path = Application.persistentDataPath + "/level" + levelHandler.buildIndex.ToString() + ".data";
         if (File.Exists(path))
@@ -69,5 +70,35 @@ public static class SaveSystem
         {
             Debug.LogError("Save file at the path: '" + path + "' was not found and therefore could not be deleted.");
         }
+    }
+
+    // For Options Data
+    public static void SaveOptionsData(OptionsHandler optionsHandler)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/options.data";
+        FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+
+        OptionsData optionsData = new OptionsData(optionsHandler);
+
+        formatter.Serialize(stream, optionsData);
+        stream.Close();
+    }
+
+    public static OptionsData LoadOptionsData()
+    {
+        string path = Application.persistentDataPath + "/options.data";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            OptionsData optionsData = formatter.Deserialize(stream) as OptionsData;
+            stream.Close();
+
+            return optionsData;
+        }
+        Debug.LogWarning("Options file at the path: '" + path + "' was not found. | Default value of 0.6f has been set.");
+        return null;
     }
 }

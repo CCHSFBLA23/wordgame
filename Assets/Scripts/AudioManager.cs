@@ -1,15 +1,17 @@
 using System;
 using UnityEngine.Audio;
 using UnityEngine;
-
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioReferences references;
     public static Sound[] soundRecords;
+    public static List<AudioSource> musicSources = new List<AudioSource>();
 
     void Awake()
     {
+        // Initialize Audio Clips
         soundRecords = new Sound[references.sounds.Count];
     
         for (int i = 0; i < soundRecords.Length; i++)
@@ -21,7 +23,12 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            if (s.isMusic)
+                musicSources.Add(s.source);
         }
+
+        // Master Volume Stuff
+        AudioListener.volume = SaveSystem.LoadOptionsData()?.masterVolume ?? 0.6f;
     }
 
     // The following command is used to play an audio clip  
@@ -33,6 +40,18 @@ public class AudioManager : MonoBehaviour
         try
         {
             Sound s = Array.Find(soundRecords, sound => sound.name == title);
+            OptionsData values = SaveSystem.LoadOptionsData();
+
+            if (values != null)
+            {
+                if (s.isMusic)
+                    s.source.volume = values.musicVolume;
+                else
+                    s.source.volume = values.effectsVolume;
+            }
+            else // default to exact masterVolume value
+                s.source.volume = AudioListener.volume;
+
             s.source.Play();
         }
         catch
