@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioReferences references;
     public static Sound[] soundRecords;
-    public static List<AudioSource> musicSources = new List<AudioSource>();
+    public List<AudioSource> musicSources = new List<AudioSource>();
 
     void Awake()
     {
