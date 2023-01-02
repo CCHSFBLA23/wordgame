@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class SceneHandler : MonoBehaviour
 {
     public Animator transitionAnim;
-
     public void LoadScene(int index)
     {
         if (index <= SceneManager.sceneCountInBuildSettings)
@@ -35,10 +34,9 @@ public class SceneHandler : MonoBehaviour
 
     IEnumerator transition(int levelIndex)
     {
-        transitionAnim.SetTrigger("Start");
-
+        transitionAnim.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.8f);
-
+        
         SceneManager.LoadScene(levelIndex);
     }
 

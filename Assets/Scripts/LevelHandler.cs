@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class LevelHandler : MonoBehaviour
 {
     [SerializeField] private string goalWord;
-    [SerializeField] private string levelTitle;
+    [SerializeField] public string levelTitle;
     
     private BoxHandler _boxHandler;
     private Dictionary<GridPosition, Vector2> _startingLocations = new Dictionary<GridPosition, Vector2>();

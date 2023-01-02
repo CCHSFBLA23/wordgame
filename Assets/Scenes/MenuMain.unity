@@ -13724,6 +13724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 7294501171170337076}
+  fade: {fileID: 0}
 --- !u!1 &2071755881
 GameObject:
   m_ObjectHideFlags: 0
