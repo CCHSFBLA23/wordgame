@@ -18,8 +18,9 @@ public class OptionsHandler : MonoBehaviour
         // If musicSlider changed update all music AudioSource volumes
         if (slider == musicSlider)
         {
-            for (int i = 0; i < AudioManager.musicSources.Count; i++)
-                AudioManager.musicSources[i].volume = slider.value;
+            AudioManager audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            for (int i = 0; i < audioManager.musicSources.Count; i++)
+                audioManager.musicSources[i].volume = slider.value;
         }
 
         SaveSystem.SaveOptionsData(this);
@@ -29,8 +30,8 @@ public class OptionsHandler : MonoBehaviour
     {
         // Set options to last set value
         OptionsData values = SaveSystem.LoadOptionsData();
-        masterSlider.value = values.masterVolume;
-        effectsSlider.value = values.effectsVolume;
-        musicSlider.value = values.musicVolume;
+        masterSlider.value = values?.masterVolume ?? 0.6f;
+        effectsSlider.value = values?.effectsVolume ?? 0.6f;
+        musicSlider.value = values?.musicVolume ?? 0.6f;
     }
 }
