@@ -30,8 +30,8 @@ public class OptionsHandler : MonoBehaviour
     {
         // Set options to last set value
         OptionsData values = SaveSystem.LoadOptionsData();
-        masterSlider.value = values.masterVolume;
-        effectsSlider.value = values.effectsVolume;
-        musicSlider.value = values.musicVolume;
+        masterSlider.value = values?.masterVolume ?? 0.6f;
+        effectsSlider.value = values?.effectsVolume ?? 0.6f;
+        musicSlider.value = values?.musicVolume ?? 0.6f;
     }
 }
