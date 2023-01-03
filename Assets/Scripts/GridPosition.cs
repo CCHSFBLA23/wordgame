@@ -13,13 +13,19 @@ public class GridPosition : MonoBehaviour
     public Vector2 current;
     public Vector2 target;
     [SerializeField] private float moveSpeed = 20f;
-
+    public List<Vector2> positionHistory;
+    
     private void Awake()
     {
+        positionHistory.Clear();
         var position = transform.position;
         target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
         transform.position = target;
         current = target;
+        if (Application.isPlaying)
+        {
+            positionHistory.Add(current);
+        }
     }
 
     protected virtual void Start()
