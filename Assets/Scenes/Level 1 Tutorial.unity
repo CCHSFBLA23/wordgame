@@ -4095,7 +4095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalWord: moo
-  levelTitle: 'Level 1: Cow goes ___'
+  levelTitle: COW GOES ___
   solved: 0
   timer: {fileID: 969014989}
   buildIndex: 0
