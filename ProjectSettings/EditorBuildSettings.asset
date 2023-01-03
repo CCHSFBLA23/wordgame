@@ -9,30 +9,30 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuMain.unity
     guid: 9de50c913c9ad4742806de21416edf3f
   - enabled: 1
-    path: Assets/Scenes/Level 1.unity
+    path: Assets/Scenes/Level 1 Tutorial.unity
     guid: 586dcdb34d777f74c9fc6d93fa8180a1
   - enabled: 1
-    path: Assets/Scenes/Level 2.unity
+    path: Assets/Scenes/Level 2 Heavy.unity
     guid: b00a800ecf19fde459f1f69352f0a6f4
   - enabled: 1
-    path: Assets/Scenes/Level 3.unity
-    guid: 19b0809626b72d24087be5ad697f01d2
-  - enabled: 1
-    path: Assets/Scenes/Level 4.unity
+    path: Assets/Scenes/Level 3 Falling.unity
     guid: 2b855cc62e5769a459e78a59d1be86a2
   - enabled: 1
-    path: Assets/Scenes/Level 5.unity
+    path: Assets/Scenes/Level 4 Pullable.unity
+    guid: 19b0809626b72d24087be5ad697f01d2
+  - enabled: 1
+    path: Assets/Scenes/Level 5 Linked.unity
     guid: 94f5f8b69c264474982ff37002e465bb
   - enabled: 1
-    path: Assets/Scenes/Level 6.unity
+    path: Assets/Scenes/Level 6 Hard.unity
     guid: a7e4048d99dfc6a468b977b16f43e4ea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 7.unity
     guid: b02588521dec2d2429cc127cb61618cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 8.unity
     guid: a2a0f60816e74df4480db9b61b600355
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 9.unity
     guid: a339e56ef64f4e74691a2ba99500f03d
   m_configObjects:
