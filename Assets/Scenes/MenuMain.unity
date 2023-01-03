@@ -13724,7 +13724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 7294501171170337076}
-  fade: {fileID: 0}
 --- !u!1 &2071755881
 GameObject:
   m_ObjectHideFlags: 0
@@ -14246,7 +14245,7 @@ Animator:
   m_GameObject: {fileID: 7294501171170337080}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 22d9231754fd6584ba64c4ea8abc084d, type: 2}
+  m_Controller: {fileID: 9100000, guid: beb7afc56084c3a4caa46ffcec66d450, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

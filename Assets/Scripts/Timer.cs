@@ -12,11 +12,6 @@ public class Timer : MonoBehaviour
     public LevelHandler levelHandler;
     TimeSpan timeElapsed;
 
-    private void Start()
-    {
-        _timer.Start();
-    }
-
     private void UpdateTimer()
     {
         timeElapsed = _timer.Elapsed;

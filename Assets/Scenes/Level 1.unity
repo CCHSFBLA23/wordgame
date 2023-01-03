@@ -3512,6 +3512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 275394595624168926, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4321414053912743982, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3560,17 +3564,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 4321414053912743983, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4321414055233328634, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4321414055233328638, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4837099795110798010, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 603979775
+      value: 16777215
       objectReference: {fileID: 0}
     - target: {fileID: 6269756968508033314, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_IsActive
@@ -3644,6 +3652,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61755521c92894845bf45248c40a1b18, type: 3}
+--- !u!1 &1416057308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4321414053636807480, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
+  m_PrefabInstance: {fileID: 1267769635}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462913925
 GameObject:
   m_ObjectHideFlags: 0
@@ -3881,11 +3894,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539632143}
   m_CullTransparentMesh: 1
---- !u!1 &1547051920 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4321414055233328638, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
-  m_PrefabInstance: {fileID: 1267769635}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577533174
 GameObject:
   m_ObjectHideFlags: 0
@@ -5933,7 +5941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd0ea5b8bbd84d91a4ec941b81e253bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fade: {fileID: 1547051920}
+  fadePanel: {fileID: 1416057308}
+  pressAnyKeyPrompt: Press any key to begin.
 --- !u!1 &1707319843
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class LevelHandler : MonoBehaviour
 
     private void Start()
     {
+        timer.Pause();
         togglePlayerInput(true);
         buildIndex = SceneManager.GetActiveScene().buildIndex;
         AudioManager.Play($"Level {buildIndex}");
@@ -58,7 +59,17 @@ public class LevelHandler : MonoBehaviour
     {
         return levelTitle;
     }
-    
+
+    private void OnAnyKey(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
+            GameObject.FindGameObjectWithTag("FadeTransition").transform.GetChild(0).GetComponent<Animator>().SetTrigger("FadeOut");
+            StartCoroutine(_sceneHandler.delay(0.4f, () => timer.Unpause()));
+        }
+    }
+
     private void Update()
     {    
         foreach (var startBox in _boxHandler.boxes)
