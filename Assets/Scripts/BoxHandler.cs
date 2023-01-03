@@ -162,10 +162,9 @@ public class BoxHandler : MonoBehaviour
         private void CalculateMovementPlayer()
         {
             if (!(Vector2.Distance(playerPosition.current, playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
-        
-            
             var moveVector = CalcMoveVector(_inputVector);
-        
+            if (moveVector == Vector2.zero) return;
+            
             var canMovePlayer = true;
             if (CheckBoxCollision(playerPosition.target, moveVector))
             {
@@ -205,10 +204,25 @@ public class BoxHandler : MonoBehaviour
         private Vector2 CalcMoveVector(Vector2 input)
         {
             Vector2 moveVector = new Vector2();
-            if (input.x != 0 ^ input.y != 0)
+            float inputDirection = Vector2.SignedAngle(input, Vector2.right);
+            if (inputDirection == 0f)
             {
-                moveVector = input;
+                moveVector = Vector2.right;
             }
+            else if (inputDirection == -90f)
+            {
+                moveVector = Vector2.up;
+            }
+            else if (inputDirection == 90f)
+            {
+                moveVector = Vector2.down;
+            }
+            else if (inputDirection == 180f)
+            {
+                moveVector = Vector2.left;
+            }
+
+            Debug.Log(inputDirection);
             return moveVector;
         }
     
