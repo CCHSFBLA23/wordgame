@@ -15,4 +15,9 @@ public class LevelIntro : MonoBehaviour
         LevelHandler levelHandler = levelManager.GetComponent<LevelHandler>();
         fadePanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = levelHandler.GetTitle() + Environment.NewLine + Environment.NewLine + pressAnyKeyPrompt;
     }
+
+    private void Update()
+    {
+        
+    }
 }

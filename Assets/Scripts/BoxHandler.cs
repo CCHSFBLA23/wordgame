@@ -221,8 +221,7 @@ public class BoxHandler : MonoBehaviour
             {
                 moveVector = Vector2.left;
             }
-
-            Debug.Log(inputDirection);
+            
             return moveVector;
         }
     
