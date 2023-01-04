@@ -17,7 +17,7 @@ To start the game, run `WordGame.exe`.
 - #### Zach Goodson (UI & Animation Design)
 - #### Safwan Morshed (Git Coordinator, Music, Level Design)
 # Acknowledgements
- - All the producers of the public domain loops sampled in the soundtrack and SFX[^1]:
+ - All the producers of the public domain loops sampled in the soundtrack and SFX[^1]
  - Hiroyuki Imabayashi for inspiration (Sokoban)
  - Hempuli for inspiration (Baba is You)
  - #### Libraries & Software Used
