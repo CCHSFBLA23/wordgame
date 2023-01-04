@@ -13,7 +13,7 @@ A build of the game is provided within the `build/` directory of the source code
 To start the game, run `WordGame.exe`. 
 
 # Credits:
-- #### Gil Powers (Mechanics & Level Design)
+- #### Gil Powers (Game Mechanics & Level Design)
 - #### Zach Goodson (UI & Animation Design)
 - #### Safwan Morshed (Git Coordinator, Music, Level Design)
 # Acknowledgements
@@ -22,11 +22,10 @@ To start the game, run `WordGame.exe`.
  - Hempuli for inspiration (Baba is You)
  - #### Libraries & Software Used
    - Unity Game Engine (with C# Scripting)
-     - TextMeshPro
-       - LiberationSans.ttf (SIL OFL)
-       - VarelaRound.ttf (SIL OFL)
+   - LiberationSans.ttf (SIL OFL)
+   - VarelaRound.ttf (SIL OFL)
    - FL Studio 20 - for audio design
-   - paint.net - asset design
+   - Inkscape - asset design
  
 [^1]:  https://www.looperman.com/loops/detail/313141/cool-it-now-lofi-type-loop-free-80bpm-lo-fi-rhodes-piano-loop
   https://www.looperman.com/loops/detail/317308/lush-124-calm-piano-x-lofi-x-lofigirl-free-124bpm-lo-fi-piano-loop
