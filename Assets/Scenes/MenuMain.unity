@@ -6130,7 +6130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Falling | This box is effected by gravity
+  m_text: Falling | This box is affected by gravity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
@@ -24931,7 +24931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Linked | This box will effect another box with the same color
+  m_text: Linked | This box will affect another box with the same color
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
@@ -31420,7 +31420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try to do this in the least amount of time possible!
+  m_text: Try to do this as fast as you can!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
@@ -39415,7 +39415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press escape or the blue button on the top right to oause the current attempt.
+  m_text: Press escape or the blue button on the top right to pause the current attempt.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
