@@ -50,7 +50,7 @@ public class Box : GridPosition
     {
         //Appearance
         _spriteRenderer.color = preset.boxColor;
-        _text.text = letter;
+        _text.text = letter.ToUpper();
         _text.color = preset.textColor;
         
         pushable = preset.pushable;
