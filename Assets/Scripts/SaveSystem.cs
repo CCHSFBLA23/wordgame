@@ -101,4 +101,19 @@ public static class SaveSystem
         Debug.LogWarning("Options file at the path: '" + path + "' was not found. | Default value of 0.6f has been set.");
         return null;
     }
+
+    // For Both Options and Save Data
+    public static void DeleteAllSaveData()
+    {
+        string path = Application.persistentDataPath;
+        if (Directory.Exists(path))
+        {
+            Directory.Delete(path, true);
+            Directory.CreateDirectory(path);
+        }
+        else
+        {
+            Debug.LogError("Save folder at the path: '" + path + "' was not found and therefore all of the save files could not be deleted.");
+        }
+    }
 }

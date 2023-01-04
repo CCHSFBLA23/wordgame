@@ -20,9 +20,9 @@ public class TitleIntro : MonoBehaviour
     public GameObject playButton;
     public GameObject settingsButton;
     public GameObject quitButton;
+    public GameObject InstructionsButton;
 
     [Header("Border")]
-    public GameObject specialBlock;
     public Color gridColor;
     public Color borderColor;
 
@@ -32,10 +32,8 @@ public class TitleIntro : MonoBehaviour
         playButton.SetActive(false);
         quitButton.SetActive(false);
         settingsButton.SetActive(false);
+        InstructionsButton.SetActive(false);
         player.SetActive(true);
-
-        // reset colors
-        //specialBlock.GetComponent<Image>().color = gridColor;
 
         // get positions.
         titlePiecesTransform = titlePieces.GetComponent<RectTransform>();
@@ -73,8 +71,8 @@ public class TitleIntro : MonoBehaviour
                 player.SetActive(false);
                 playButton.SetActive(true);
                 quitButton.SetActive(true);
+                InstructionsButton.SetActive(true);
                 settingsButton.SetActive(true);
-                //specialBlock.GetComponent<Image>().color = borderColor;
             }
         }
     }

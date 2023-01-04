@@ -28,6 +28,11 @@ public class OptionsHandler : MonoBehaviour
 
     private void Awake()
     {
+        SetOptions();
+    }
+
+    public void SetOptions()
+    {
         // Set options to last set value
         OptionsData values = SaveSystem.LoadOptionsData();
         masterSlider.value = values?.masterVolume ?? 0.6f;
