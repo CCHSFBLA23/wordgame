@@ -21,7 +21,7 @@ public class PauseMenuController : MonoBehaviour
         _PauseCanvasParent.SetActive(true);
         Populate(levelHandler.GetTitle(), timer.GetTimerText());
         timer.Pause();
-        levelHandler.togglePlayerInput(false);
+        levelHandler.GetComponent<PlayerInput>().SwitchCurrentActionMap("PauseMenu");
     }
 
     public void ClosePauseMenu()
@@ -29,7 +29,7 @@ public class PauseMenuController : MonoBehaviour
         _PauseCanvasParent.SetActive(false);
         timer.Unpause();
         _paused = false;
-        levelHandler.togglePlayerInput(true);
+        levelHandler.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
 
     private void Populate(string levelName, string curTime)

@@ -36,23 +36,47 @@ public class LevelHandler : MonoBehaviour
         }
         
         _boxHandler = GetComponent<BoxHandler>();
-        _startingLocations[_boxHandler.playerPosition] = _boxHandler.playerPosition.target;
-        foreach (var box in _boxHandler.boxes)
-        {
-            _startingLocations[box] = box.target;
-        }
-
         _levelEndController = GetComponent<LevelEndController>();
         _sceneHandler = GetComponent<SceneHandler>();
     }
 
     public void Reset()
     {
-        foreach (var pair in _startingLocations)
+        timer.Reset();
+        _boxHandler.playerPosition.target = _boxHandler.playerPosition.positionHistory[0];
+        _boxHandler.playerPosition.positionHistory.Clear();
+        _boxHandler.playerPosition.positionHistory.Add(_boxHandler.playerPosition.target);
+        foreach (var box in _boxHandler.boxes)
         {
-            pair.Key.target = pair.Value;
+            box.target = box.positionHistory[0];
+            box.positionHistory.Clear();
+            box.positionHistory.Add(box.target);
         }
-        solved = false;
+    }
+
+
+    
+    private void OnUndo(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Undo();
+        }
+    }
+    public void Undo()
+    {
+        if (_boxHandler.playerPosition.positionHistory.Count == 1)
+        {
+            return;
+        }
+        
+        _boxHandler.playerPosition.target = _boxHandler.playerPosition.positionHistory[^2];
+        _boxHandler.playerPosition.positionHistory.RemoveAt(_boxHandler.playerPosition.positionHistory.Count-1);
+        foreach (var box in _boxHandler.boxes)
+        {
+            box.target = box.positionHistory[^2];
+            box.positionHistory.RemoveAt(box.positionHistory.Count-1);
+        }
     }
 
     public string GetTitle()

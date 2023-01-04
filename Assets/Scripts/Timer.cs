@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using System.Diagnostics;
+using UnityEngine.Playables;
 
 public class Timer : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class Timer : MonoBehaviour
             _timer.Stop();
             return;
         }
+    }
+
+    public void Reset()
+    {
+        _timer.Restart();
     }
 
     public string GetTimerText()

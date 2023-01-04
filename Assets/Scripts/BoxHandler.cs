@@ -178,8 +178,20 @@ public class BoxHandler : MonoBehaviour
                 PullRowOfBoxes(playerPosition.target, moveVector);
                 playerPosition.target += moveVector;
                 AudioManager.Play("PlayerMove");
+
+                UpdateMoveHistory();
             }
         }
+
+        private void UpdateMoveHistory()
+        {
+            playerPosition.positionHistory.Add(playerPosition.target);
+            foreach (var box in boxes)
+            {
+                box.positionHistory.Add(box.target);
+            }
+        }
+
         private void CalculateFallingMovement()
         {
             foreach (var box in _falling)
