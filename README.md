@@ -14,8 +14,8 @@ To start the game, double click to run `WordGame.exe`.
 
 # Credits:
 - #### Gil Powers (Game Mechanics & Level Design)
-- #### Zach Goodson (UI/UX, Codebase)
-- #### Safwan Morshed (Git Coordinator, Music, Level Design)
+- #### Zach Goodson (UI/UX & Codebase)
+- #### Safwan Morshed (DevOps, Music, Level Design)
 # Acknowledgements
  - All the producers of the public domain loops sampled in the soundtrack and SFX[^1]
  - Hempuli for inspiration (Baba is You)
