@@ -58,17 +58,28 @@ public class BoxHandler : MonoBehaviour
     
     //Checks if there is a box in the scene that is at the position that is about to be moved to.
     //Returns either a reference to the object or null.
-    public Box CheckBoxCollision(Vector2 position, Vector2 moveVector)
+    public bool CheckBoxCollision(Vector2 position, Vector2 moveVector, out Box collidedBox)
     {
         foreach (var t in boxes)
         {
-            if (t.target == position + moveVector)
-            {
-                return t;
-            }
+            if (t.target != position + moveVector) continue;
+            collidedBox = t;
+            return true;
         }
-
-        return null;
+        
+        collidedBox = null;
+        return false;
+    }
+    //Overloads previous method to not require an output.
+    public bool CheckBoxCollision(Vector2 position, Vector2 moveVector)
+    {
+        foreach (var t in boxes)
+        {
+            if (t.target != position + moveVector) continue;
+            return true;
+        }
+        
+        return false;
     }
     
     //When moving, this is used to deal with the player moving and pushing in general.
@@ -78,12 +89,10 @@ public class BoxHandler : MonoBehaviour
     //If there is not a wall, it will move every box in the row.
     private bool PushRowOfBoxes(Vector2 position, Vector2 moveVector)
     {
-        Box cur;
         Box starting;
         var toPush = new List<Box>();
-        if (CheckBoxCollision(position, moveVector))
+        if (CheckBoxCollision(position, moveVector, out var cur))
         {
-            cur = CheckBoxCollision(position, moveVector);
             starting = cur;
             if (!cur.pushable) return false;
             toPush.Add(cur);
@@ -93,15 +102,14 @@ public class BoxHandler : MonoBehaviour
             return true;
         }
 
-        while (CheckBoxCollision(cur.target, moveVector))
+        while (CheckBoxCollision(cur.target, moveVector, out cur))
         {
-            cur = CheckBoxCollision(cur.target, moveVector);
             if (!cur.pushable) return false;
             if (cur.target == playerPosition.target) return false;
             toPush.Add(cur);
         }
 
-        if (CheckWallCollisions(cur.target, moveVector))
+        if (cur != null && CheckWallCollisions(cur.target, moveVector))
         {
             return false;
         }
@@ -135,17 +143,15 @@ public class BoxHandler : MonoBehaviour
         //See PushRowOfBoxes for a similar process.
         void PullRowOfBoxes(Vector2 position, Vector2 moveVector)
         {
-            Box cur;
             var toPull = new List<GridPosition>();
 
-            if (!CheckBoxCollision(position, -moveVector)) return;
-            cur = CheckBoxCollision(position, -moveVector);
+            if (!CheckBoxCollision(position, -moveVector, out var cur)) return;
+            CheckBoxCollision(position, -moveVector, out cur);
             if (!cur.pullable) return;
             toPull.Add(cur);
         
-            while (CheckBoxCollision(cur.target, -moveVector))
+            while (CheckBoxCollision(cur.target, -moveVector, out cur))
             {
-                cur = CheckBoxCollision(cur.target, -moveVector);
                 if (!cur.pullable) break;
                 
                 toPull.Add(cur);
@@ -169,18 +175,15 @@ public class BoxHandler : MonoBehaviour
             if (CheckBoxCollision(playerPosition.target, moveVector))
             {
                 //Checks if the original box pushed is a linked box.
-                var originalBox = CheckBoxCollision(playerPosition.target, moveVector);
                 canMovePlayer = PushRowOfBoxes(playerPosition.target, moveVector);
             }
 
-            if (!CheckWallCollisions(playerPosition.target, moveVector) && canMovePlayer)
-            {
-                PullRowOfBoxes(playerPosition.target, moveVector);
-                playerPosition.target += moveVector;
-                AudioManager.Play("PlayerMove");
+            if (CheckWallCollisions(playerPosition.target, moveVector) || !canMovePlayer) return;
+            PullRowOfBoxes(playerPosition.target, moveVector);
+            playerPosition.target += moveVector;
+            AudioManager.Play("PlayerMove");
 
-                UpdateMoveHistory();
-            }
+            UpdateMoveHistory();
         }
 
         private void UpdateMoveHistory()

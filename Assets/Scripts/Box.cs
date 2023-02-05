@@ -12,7 +12,7 @@ public class Box : GridPosition
 
 
     [SerializeField] private BoxPreset preset; 
-    public string letter; 
+    public char letter; 
     private Color color = Color.white;
     private SpriteRenderer _spriteRenderer;
     private TMP_Text _text;
@@ -50,7 +50,7 @@ public class Box : GridPosition
     {
         //Appearance
         _spriteRenderer.color = preset.boxColor;
-        _text.text = letter.ToUpper();
+        _text.text = letter.ToString().ToUpper();
         _text.color = preset.textColor;
         
         pushable = preset.pushable;

@@ -101,8 +101,9 @@ MonoBehaviour:
   current: {x: 0, y: 0}
   target: {x: 3, y: 0}
   moveSpeed: 20
+  positionHistory: []
   preset: {fileID: 11400000, guid: 306d21ac525ccc945b367f1d9cc0903c, type: 2}
-  letter: C
+  letter: 67
   pushable: 1
   pullable: 0
   sticky: 0

@@ -7,12 +7,11 @@ using UnityEngine.InputSystem;
 public class LevelHandler : MonoBehaviour
 {
     [Header("Level Properties")]
-    [SerializeField] private string goalWord;
+    [SerializeField] public string goalWord;
     [SerializeField] public string levelTitle;
     public bool solved = false;
     
     private BoxHandler _boxHandler;
-    private bool _firstSolved = false;
 
     [Header("Score Stuff")]
     public Timer timer;
@@ -25,6 +24,7 @@ public class LevelHandler : MonoBehaviour
     //Ran at start of level.
     private void Start()
     {
+        goalWord = goalWord.ToLower();
         timer.Pause();
         togglePlayerInput(true);
         buildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -46,6 +46,7 @@ public class LevelHandler : MonoBehaviour
         //Loops through every box.
         foreach (var startBox in _boxHandler.boxes)
         {
+            if(Char.ToLower(startBox.letter) != goalWord[0]) continue;
             //Checks words from top to bottom. Finds the first box in a chain by checking if it has one below and not above.
             if (!_boxHandler.CheckBoxCollision(startBox.target, Vector2.up) && _boxHandler.CheckBoxCollision(startBox.target, Vector2.down))
             {
@@ -53,10 +54,13 @@ public class LevelHandler : MonoBehaviour
                 var cur = startBox;
                 currentString += cur.letter;
                 //Follows the chain of boxes and adds their letters to the word.
-                while (_boxHandler.CheckBoxCollision(cur.target, Vector2.down))
+                while (_boxHandler.CheckBoxCollision(cur.target, Vector2.down, out cur))
                 {
-                    cur = _boxHandler.CheckBoxCollision(cur.target, Vector2.down);
                     currentString += cur.letter;
+                    if (!goalWord.Contains(currentString, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        break;
+                    }
                 }
                 //Checks if the target word is the same as the current word.
                 if (string.Equals(currentString, goalWord, StringComparison.CurrentCultureIgnoreCase))
@@ -76,10 +80,13 @@ public class LevelHandler : MonoBehaviour
                 var currentString = "";
                 var cur = startBox;
                 currentString += cur.letter;
-                while (_boxHandler.CheckBoxCollision(cur.target, Vector2.right))
+                while (_boxHandler.CheckBoxCollision(cur.target, Vector2.right, out cur))
                 {
-                    cur = _boxHandler.CheckBoxCollision(cur.target, Vector2.right);
                     currentString += cur.letter;
+                    if (!goalWord.Contains(currentString, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        break;
+                    }
                 }
                 if (string.Equals(currentString, goalWord, StringComparison.CurrentCultureIgnoreCase))
                 {
