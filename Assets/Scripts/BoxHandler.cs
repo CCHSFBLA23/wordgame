@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,7 +17,6 @@ public class BoxHandler : MonoBehaviour
     [HideInInspector]public Box[] boxes;
     private List<Box> _falling = new List<Box>();
     private List<Box> _linked = new List<Box>();
-    public List<Box> _toMoveLinked = new List<Box>();
 
     private LevelHandler _levelHandler;
     [HideInInspector]public GridPosition playerPosition;
@@ -89,11 +90,9 @@ public class BoxHandler : MonoBehaviour
     //If there is not a wall, it will move every box in the row.
     private bool PushRowOfBoxes(Vector2 position, Vector2 moveVector)
     {
-        Box starting;
         var toPush = new List<Box>();
         if (CheckBoxCollision(position, moveVector, out var cur))
         {
-            starting = cur;
             if (!cur.pushable) return false;
             toPush.Add(cur);
         }
@@ -102,6 +101,7 @@ public class BoxHandler : MonoBehaviour
             return true;
         }
 
+        
         while (CheckBoxCollision(cur.target, moveVector, out cur))
         {
             if (!cur.pushable) return false;
@@ -109,31 +109,28 @@ public class BoxHandler : MonoBehaviour
             toPush.Add(cur);
         }
 
-        if (cur != null && CheckWallCollisions(cur.target, moveVector))
+        if (toPush.Any() && CheckWallCollisions(toPush.Last().target, moveVector))
         {
             return false;
         }
-        else
+
+        bool moved = false;
+        foreach (var gridPosition in toPush)
         {
-            bool moved = false;
-            foreach (var gridPosition in toPush)
+            if (gridPosition.linked && !gridPosition.linkedMoved)
             {
-                if (gridPosition.linked && !gridPosition.linkedMoved)
+                gridPosition.linkedMoved = true;
+                foreach (var box in _linked)
                 {
-                    gridPosition.linkedMoved = true;
-                    foreach (var box in _linked)
+                    if (!toPush.Contains(box) && !moved && !box.linkedMoved)
                     {
-                        if (!toPush.Contains(box) && !moved && !box.linkedMoved)
-                        {
-                            box.linkedMoved = true;
-                            PushRowOfBoxes(box.target - moveVector, moveVector);
-                        }
+                        box.linkedMoved = true;
+                        PushRowOfBoxes(box.target - moveVector, moveVector);
                     }
-                    moved = true;
                 }
-                gridPosition.target += moveVector;
+                moved = true;
             }
-            
+            gridPosition.target += moveVector;
         }
 
         return true;
@@ -220,19 +217,19 @@ public class BoxHandler : MonoBehaviour
         {
             Vector2 moveVector = new Vector2();
             float inputDirection = Vector2.SignedAngle(input, Vector2.right);
-            if (inputDirection == 0f)
+            if (Math.Abs(inputDirection) < 10f)
             {
                 moveVector = Vector2.right;
             }
-            else if (inputDirection == -90f)
+            else if (Math.Abs(inputDirection - (-90f)) < 10f)
             {
                 moveVector = Vector2.up;
             }
-            else if (inputDirection == 90f)
+            else if (Math.Abs(inputDirection - 90f) < 10f)
             {
                 moveVector = Vector2.down;
             }
-            else if (inputDirection == 180f)
+            else if (Math.Abs(inputDirection - 180f) < 10f)
             {
                 moveVector = Vector2.left;
             }
@@ -259,7 +256,6 @@ public class BoxHandler : MonoBehaviour
                 }
             }
 
-            _toMoveLinked = _linked;
             CalculateMovementPlayer();
             CalculateFallingMovement();
         }
