@@ -1,5 +1,5 @@
 # ![WordBox](WordGame.png)
-###  *A sokoban-inspired word puzzle game* 
+###  *A word puzzle game where you moves boxes to form words*
 CCHS FBLA 2023 Computer Game & Simulation Programming
 ___
 
@@ -8,17 +8,16 @@ See [DOCS.md](DOCS.md)
 # Usage:
 You can download the source code and build the game yourself in Unity if you desire.
 
-A build of the game is provided within the `build/` directory of the source code for your convenience.
+A build of the game is provided on the releases page of this GitHub repo.
 
-To start the game, run `WordGame.exe`. 
+To start the game, double click to run `WordGame.exe`. 
 
 # Credits:
 - #### Gil Powers (Game Mechanics & Level Design)
-- #### Zach Goodson (UI & Animation Design)
-- #### Safwan Morshed (Git Coordinator, Music, Level Design)
+- #### Zach Goodson (UI/UX & Codebase)
+- #### Safwan Morshed (DevOps, Music, Level Design)
 # Acknowledgements
  - All the producers of the public domain loops sampled in the soundtrack and SFX[^1]
- - Hiroyuki Imabayashi for inspiration (Sokoban)
  - Hempuli for inspiration (Baba is You)
  - #### Libraries & Software Used
    - Unity Game Engine (with C# Scripting)
