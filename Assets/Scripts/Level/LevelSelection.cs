@@ -13,29 +13,35 @@ public class LevelSelection : MonoBehaviour
     public SceneHandler sceneHandler;
 
     private void Awake()
-    { 
+    {
         levelCount = SceneManager.sceneCountInBuildSettings - 1;
-        List<int> availableLevels = new List<int> { 1 };
-        for(int index = 2; index <= levelCount; index++)
+
+        int availableLevelIndex = 1;
+        for(int i = 2; i <= levelCount; i++)
         {
-            LevelData cur = SaveSystem.LoadLevelDataThroughBuildIndex(index - 1);
+            LevelData cur = SaveSystem.LoadLevelDataThroughBuildIndex(i - 1);
             if (cur != null)
             {
-                availableLevels.Add(index);
+                availableLevelIndex += 1;
             }
         }
-        
+
         // Loop for as many times as there are levels, add the necessary functions and labels.
-        foreach (var i in availableLevels)
+        for (var i = 1; i <= levelCount; i++)
         {
             GameObject button = Instantiate(levelButton, this.transform);
             button.GetComponentInChildren<TMP_Text>().text = i.ToString();
-            int childIndex = button.transform.GetSiblingIndex() + 1;
-            button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
-            button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(childIndex));
-            
+            if (i <= availableLevelIndex)
+            {
+                int childIndex = button.transform.GetSiblingIndex() + 1;
+                button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
+                button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(childIndex));
+            } 
+            else
+            {
+                button.GetComponent<Button>().interactable = false;
+            }   
         }
-        
     }
 
     private void GoToLevel(int levelIndex)
