@@ -27,10 +27,11 @@ public class LevelHandler : MonoBehaviour
     private void Start()
     {
         goalWord = goalWord.ToLower();
+        inputEnabled = false;
         timer.Pause();
-        inputEnabled = true;
         buildIndex = SceneManager.GetActiveScene().buildIndex;
         AudioManager.Play($"Level {buildIndex}");
+
         //When enabled in editor will delete save file.
         if (debugResetOnStart)
         {
@@ -43,12 +44,14 @@ public class LevelHandler : MonoBehaviour
 
         //Starts the animation for the fade in and out.
         GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
+
+        // Timer
+        StartCoroutine(_sceneHandler.delay(0.4f, () => { inputEnabled = true; timer.Unpause(); }));
     }
 
     //Every frame checks if the level is solved.
      private void Update()
-    {    
-        
+     {         
         //Loops through every box.
         foreach (var startBox in boxes)
         {
