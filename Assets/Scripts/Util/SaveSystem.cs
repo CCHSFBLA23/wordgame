@@ -6,39 +6,39 @@ using System;
 public static class SaveSystem
 {
     // For Level Data
-    public static void SaveLevelData(LevelData levelData, bool isSinglePlayer)
+    public static void SaveLevelData(LevelSaveData levelSaveData, bool isSinglePlayer)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = "";
             
         if (isSinglePlayer)
-            path = Application.persistentDataPath + "/SinglePlayer/level" + levelData.levelIndex.ToString() + ".data";
+            path = Application.persistentDataPath + "/SinglePlayer/level" + levelSaveData.levelIndex.ToString() + ".data";
         else
-            path = Application.persistentDataPath + "/DoublePlayer/level" + levelData.levelIndex.ToString() + ".data";
+            path = Application.persistentDataPath + "/DoublePlayer/level" + levelSaveData.levelIndex.ToString() + ".data";
 
         new FileInfo(path).Directory.Create();
 
         FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
 
-        formatter.Serialize(stream, levelData);
+        formatter.Serialize(stream, levelSaveData);
         stream.Close();
     }
 
-    public static LevelData LoadLevelData(LevelData levelData, bool isSinglePlayer)
+    public static LevelSaveData LoadLevelData(LevelSaveData levelSaveData, bool isSinglePlayer)
     {
         string path = "";
 
         if (isSinglePlayer)
-            path = Application.persistentDataPath + "/SinglePlayer/level" + levelData.levelIndex.ToString() + ".data";
+            path = Application.persistentDataPath + "/SinglePlayer/level" + levelSaveData.levelIndex.ToString() + ".data";
         else
-            path = Application.persistentDataPath + "/DoublePlayer/level" + levelData.levelIndex.ToString() + ".data";
+            path = Application.persistentDataPath + "/DoublePlayer/level" + levelSaveData.levelIndex.ToString() + ".data";
 
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            LevelData savedData = formatter.Deserialize(stream) as LevelData;
+            LevelSaveData savedData = formatter.Deserialize(stream) as LevelSaveData;
             stream.Close();
 
             return savedData;
@@ -47,7 +47,7 @@ public static class SaveSystem
         return null;
     }
 
-    public static LevelData LoadLevelDataThroughBuildIndex(int index, bool isSinglePlayer)
+    public static LevelSaveData LoadLevelDataThroughBuildIndex(int index, bool isSinglePlayer)
     {
         string path = "";
 
@@ -61,7 +61,7 @@ public static class SaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            LevelData savedData = formatter.Deserialize(stream) as LevelData;
+            LevelSaveData savedData = formatter.Deserialize(stream) as LevelSaveData;
             stream.Close();
 
             return savedData;
@@ -70,9 +70,9 @@ public static class SaveSystem
         return null;
     }
 
-    public static TimeSpan LoadLevelScore(LevelData levelData, bool isSinglePlayer)
+    public static TimeSpan LoadLevelScore(LevelSaveData levelSaveData, bool isSinglePlayer)
     {
-        double seconds = LoadLevelData(levelData, isSinglePlayer).seconds;
+        double seconds = LoadLevelData(levelSaveData, isSinglePlayer).seconds;
         return TimeSpan.FromSeconds(seconds);
     }
 

@@ -18,7 +18,7 @@ public class LevelEndController : MonoBehaviour
         levelEndCanvasParent.SetActive(true);
         levelTitleText.text = levelHandler.GetTitle();
         time.text = timer.GetTimerText();
-        highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
+        highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
     }
 
     public void Disable()

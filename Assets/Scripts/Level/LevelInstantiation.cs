@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Level;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,10 +8,10 @@ using UnityEngine.Tilemaps;
 
 public class LevelInstantiation : MonoBehaviour
 {
-    [Header("Level Settings")]
-    public string levelName;
-    public string goalWord;
-    public bool isSinglePlayer;
+    [Header("Level Settings")] 
+    public LevelData levelData;
+    
+    
     [Header("Drag and Drop")]
     // Start is called before the first frame update
     public GameObject levelPrefab;
@@ -24,9 +25,9 @@ public class LevelInstantiation : MonoBehaviour
         LevelHandler levelHandler = level.GetComponentInChildren<LevelHandler>();
         BoxHandler boxHandler = level.GetComponentInChildren<BoxHandler>();
 
-        levelHandler.levelTitle = levelName;
-        levelHandler.goalWord = goalWord;
-        levelHandler.isSinglePlayer = isSinglePlayer;
+        levelHandler.levelTitle = levelData.levelName;
+        levelHandler.goalWord = levelData.goalWord;
+        levelHandler.isSinglePlayer = levelData.isSinglePlayer;
         var position = playerStartingPosition.position;
         var playerPosition = boxHandler.player.GetComponent<GridPosition>();
         playerPosition.target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));

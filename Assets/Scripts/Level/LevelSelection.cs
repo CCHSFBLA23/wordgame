@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Level;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class LevelSelection : MonoBehaviour
     public GameObject levelButton;
     public SceneHandler sceneHandler;
     public bool isForSinglePlayer;
+    
 
     private void Awake()
     {
@@ -20,7 +22,7 @@ public class LevelSelection : MonoBehaviour
         int availableLevelIndex = 1;
         for(int i = 2; i <= levelCount; i++)
         {
-            LevelData cur = SaveSystem.LoadLevelDataThroughBuildIndex(i - 1, isForSinglePlayer);
+            LevelSaveData cur = SaveSystem.LoadLevelDataThroughBuildIndex(i - 1, isForSinglePlayer);
             if (cur != null)
             {
                 availableLevelIndex += 1;

@@ -1,20 +1,14 @@
-using System.Diagnostics;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class LevelData
+namespace Level
 {
-    public int levelIndex;
-    public double seconds;
-
-    public LevelData (LevelHandler levelHandler)    
+    [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelData")]
+    public class LevelData : ScriptableObject
     {
-        levelIndex = levelHandler.buildIndex;
-        seconds = levelHandler.timer.GetTimerSeconds();
-    }
+        public string levelName;
+        public string goalWord;
+        public bool isSinglePlayer;
 
-    public LevelData (int buildIndex, double time)
-    {
-        levelIndex = buildIndex;
-        seconds = time;
+        public int buildIndex;
     }
 }

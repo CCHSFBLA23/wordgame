@@ -156,8 +156,8 @@ public class LevelHandler : MonoBehaviour
     // Bound in Player Input
     public void UpdateBestScore()
     {
-        LevelData currentAttempt = new LevelData(buildIndex, timer.GetTimerSeconds());
-        LevelData savedScore = SaveSystem.LoadLevelData(currentAttempt, isSinglePlayer);
+        LevelSaveData currentAttempt = new LevelSaveData(buildIndex, timer.GetTimerSeconds());
+        LevelSaveData savedScore = SaveSystem.LoadLevelData(currentAttempt, isSinglePlayer);
 
         // Checks if there is a high score.
         if (savedScore != null)
