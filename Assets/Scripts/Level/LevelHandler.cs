@@ -40,6 +40,9 @@ public class LevelHandler : MonoBehaviour
         _boxHandler = GetComponent<BoxHandler>();
         _levelEndController = GetComponent<LevelEndController>();
         _sceneHandler = GetComponent<SceneHandler>();
+
+        //Starts the animation for the fade in and out.
+        GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
     }
 
     //Every frame checks if the level is solved.
@@ -175,34 +178,18 @@ public class LevelHandler : MonoBehaviour
             Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(currentAttempt, isSinglePlayer).ToString(@"mm\:ss"));
         }
     }
-    
-    
 
     public string GetTitle()
     {
         return levelTitle;
     }
-    
-    //Causes the level to fade in when anything is pressed. Set up in Player Input
-    // private void OnAnyKey(InputValue value)
-    // {
-    //     if (value.isPressed)
-    //     {
-    //         //Starts the animation for the fade in and out.
-    //         GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
-    //         GameObject.FindGameObjectWithTag("FadeTransition").transform.GetChild(0).GetComponent<Animator>().SetTrigger("FadeOut");
-    //         StartCoroutine(_sceneHandler.delay(0.4f, () => timer.Unpause()));
-    //     }
-    // }
 
-    
-    
-    // public void togglePlayerInput(bool setActive)
-    // {
-    //     if (setActive)
-    //         GetComponent<PlayerInput>().ActivateInput();
-    //     else
-    //         GetComponent<PlayerInput>().DeactivateInput();
-    // }
+    //public void togglePlayerInput(bool setActive)
+    //{
+    //    if (setActive)
+    //        GetComponent<PlayerInput>().ActivateInput();
+    //    else
+    //        GetComponent<PlayerInput>().DeactivateInput();
+    //}
 
 }

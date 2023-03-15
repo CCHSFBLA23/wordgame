@@ -1408,6 +1408,7 @@ MonoBehaviour:
   goalWord: cat
   levelTitle: crazy
   solved: 0
+  isSinglePlayer: 0
   timer: {fileID: 3131714457250368153}
   buildIndex: 0
   debugResetOnStart: 0
@@ -4144,7 +4145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4321414053912743983, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4321414053912743983, guid: 09ad746c4113ec54b9976714c71c9ce2, type: 3}
       propertyPath: m_TagString
@@ -4181,7 +4182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193078534178194776}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd0ea5b8bbd84d91a4ec941b81e253bc, type: 3}
   m_Name: 
