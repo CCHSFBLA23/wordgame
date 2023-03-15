@@ -1,23 +1,20 @@
-using System.Collections.Generic;
 using Level;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
 
 public class LevelSelection : MonoBehaviour
 {
-    public int levelCount;
-    
+    private int levelCount;
     public GameObject levelButton;
     public SceneHandler sceneHandler;
     public bool isForSinglePlayer;
-    
+    public LevelData[] levels;
 
     private void Awake()
     {
-        levelCount = SceneManager.sceneCountInBuildSettings;
+        levelCount = levels.Length;
 
         int availableLevelIndex = 1;
         for(int i = 2; i <= levelCount; i++)
@@ -30,20 +27,23 @@ public class LevelSelection : MonoBehaviour
         }
 
         // Loop for as many times as there are levels, add the necessary functions and labels.
-        for (var i = 1; i <= levelCount; i++)
+        int index = 0;
+        foreach (var level in levels)
         {
             GameObject button = Instantiate(levelButton, this.transform);
-            button.GetComponentInChildren<TMP_Text>().text = i.ToString();
-            if (i <= availableLevelIndex)
+            button.GetComponentInChildren<TMP_Text>().text = (index + 1).ToString();
+
+            if (index <= availableLevelIndex)
             {
-                int childIndex = button.transform.GetSiblingIndex() + 1;
                 button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
-                button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(childIndex));
-            } 
+                button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(level.buildIndex));
+            }
             else
             {
                 button.GetComponent<Button>().interactable = false;
-            }   
+            }
+
+            index++;
         }
     }
 

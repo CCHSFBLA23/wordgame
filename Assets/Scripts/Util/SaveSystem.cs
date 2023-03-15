@@ -43,7 +43,7 @@ public static class SaveSystem
 
             return savedData;
         }
-        Debug.LogError("Save file at the path: '" + path + "' was not found.");
+        Debug.LogWarning("Save file at the path: '" + path + "' was not found. null was returned");
         return null;
     }
 
