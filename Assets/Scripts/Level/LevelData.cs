@@ -11,4 +11,10 @@ public class LevelData
         levelIndex = levelHandler.buildIndex;
         seconds = levelHandler.timer.GetTimerSeconds();
     }
+
+    public LevelData (int buildIndex, double time)
+    {
+        levelIndex = buildIndex;
+        seconds = time;
+    }
 }

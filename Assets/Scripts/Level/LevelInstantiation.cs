@@ -10,6 +10,7 @@ public class LevelInstantiation : MonoBehaviour
     [Header("Level Settings")]
     public string levelName;
     public string goalWord;
+    public bool isSinglePlayer;
     [Header("Drag and Drop")]
     // Start is called before the first frame update
     public GameObject levelPrefab;
@@ -22,8 +23,10 @@ public class LevelInstantiation : MonoBehaviour
         GameObject level = Instantiate(levelPrefab);
         LevelHandler levelHandler = level.GetComponentInChildren<LevelHandler>();
         BoxHandler boxHandler = level.GetComponentInChildren<BoxHandler>();
+
         levelHandler.levelTitle = levelName;
         levelHandler.goalWord = goalWord;
+        levelHandler.isSinglePlayer = isSinglePlayer;
         var position = playerStartingPosition.position;
         var playerPosition = boxHandler.player.GetComponent<GridPosition>();
         playerPosition.target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));

@@ -11,15 +11,16 @@ public class LevelSelection : MonoBehaviour
     
     public GameObject levelButton;
     public SceneHandler sceneHandler;
+    public bool isForSinglePlayer;
 
     private void Awake()
     {
-        levelCount = SceneManager.sceneCountInBuildSettings - 1;
+        levelCount = SceneManager.sceneCountInBuildSettings;
 
         int availableLevelIndex = 1;
         for(int i = 2; i <= levelCount; i++)
         {
-            LevelData cur = SaveSystem.LoadLevelDataThroughBuildIndex(i - 1);
+            LevelData cur = SaveSystem.LoadLevelDataThroughBuildIndex(i - 1, isForSinglePlayer);
             if (cur != null)
             {
                 availableLevelIndex += 1;

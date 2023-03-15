@@ -10,6 +10,7 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] public string levelTitle;
     public bool solved = false;
     public static bool inputEnabled = true;
+    public bool isSinglePlayer;
     
     private BoxHandler _boxHandler;
 
@@ -133,7 +134,6 @@ public class LevelHandler : MonoBehaviour
     
     public void Undo()
     {
-
             //Checks if in initial position
             if (_boxHandler.playerPosition.positionHistory.Count == 1)
             {
@@ -153,27 +153,26 @@ public class LevelHandler : MonoBehaviour
             }
     }
     
-    //Bound in Player Input
-
+    // Bound in Player Input
     public void UpdateBestScore()
     {
-        double currentAttempt = timer.GetTimerSeconds();
-        LevelData savedScore = SaveSystem.LoadLevelData(this);
+        LevelData currentAttempt = new LevelData(buildIndex, timer.GetTimerSeconds());
+        LevelData savedScore = SaveSystem.LoadLevelData(currentAttempt, isSinglePlayer);
 
-        //Checks if there is a high score.
+        // Checks if there is a high score.
         if (savedScore != null)
         {
-            if (savedScore.seconds > currentAttempt)
+            if (savedScore.seconds < currentAttempt.seconds)
             {
-                SaveSystem.SaveLevelData(this);
-                Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(this).ToString(@"mm\:ss"));
+                SaveSystem.SaveLevelData(currentAttempt, isSinglePlayer);
+                Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(currentAttempt, isSinglePlayer).ToString(@"mm\:ss"));
             }
         }
         else
         {
-            //Creates a new save file for the level.
-            SaveSystem.SaveLevelData(this);
-            Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(this).ToString(@"mm\:ss"));
+            // Creates a new save file for the level.
+            SaveSystem.SaveLevelData(currentAttempt, isSinglePlayer);
+            Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(currentAttempt, isSinglePlayer).ToString(@"mm\:ss"));
         }
     }
     

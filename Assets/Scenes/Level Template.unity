@@ -1155,6 +1155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: 'cat '
   goalWord: cat
+  isSinglePlayer: 1
   levelPrefab: {fileID: 3131714457918850062, guid: 554cd350f1d08af4cb66501c69c62483, type: 3}
   playerStartingPosition: {fileID: 725636970}
   walls: {fileID: 1798496843}
