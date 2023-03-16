@@ -11,30 +11,33 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Template.unity
     guid: 586dcdb34d777f74c9fc6d93fa8180a1
-  - enabled: 0
-    path: Assets/Scenes/Level 2 Heavy.unity
-    guid: b00a800ecf19fde459f1f69352f0a6f4
-  - enabled: 0
-    path: Assets/Scenes/Level 3 Falling.unity
-    guid: 2b855cc62e5769a459e78a59d1be86a2
-  - enabled: 0
-    path: Assets/Scenes/Level 4 Pullable.unity
-    guid: 19b0809626b72d24087be5ad697f01d2
-  - enabled: 0
-    path: Assets/Scenes/Level 5 Linked.unity
-    guid: 94f5f8b69c264474982ff37002e465bb
-  - enabled: 0
-    path: Assets/Scenes/Level 6 Hard.unity
-    guid: a7e4048d99dfc6a468b977b16f43e4ea
-  - enabled: 1
-    path: Assets/Scenes/Level Template 1.unity
-    guid: 9cd9dcf09fafd964a82715fca4c4d2a3
   - enabled: 1
     path: Assets/Scenes/Level Template 2.unity
-    guid: fd1cb58cf5dbbf84eb9a243dee545bd5
+    guid: a1fec91168fb036458c18a3121965e9c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Level Template 3.unity
-    guid: 6d9aa6aef9c1da441b9322247860bd8f
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

@@ -21,6 +21,12 @@ public class LevelInstantiation : MonoBehaviour
     
     void Start()
     {
+        if (levelData == null)
+        {
+            Debug.LogError("Missing LevelData!");
+            return;
+        }
+        
         GameObject level = Instantiate(levelPrefab);
         LevelHandler levelHandler = level.GetComponentInChildren<LevelHandler>();
         BoxHandler boxHandler = level.GetComponentInChildren<BoxHandler>();
