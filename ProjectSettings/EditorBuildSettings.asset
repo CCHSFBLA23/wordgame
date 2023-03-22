@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Template.unity
     guid: 586dcdb34d777f74c9fc6d93fa8180a1
-  - enabled: 1
-    path: Assets/Scenes/Level Template 2.unity
-    guid: a1fec91168fb036458c18a3121965e9c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

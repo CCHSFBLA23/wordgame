@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,7 +52,12 @@ public class LevelHandler : MonoBehaviour
 
     //Every frame checks if the level is solved.
      private void Update()
-     {         
+     {
+         if (Input.GetKeyDown(KeyCode.Z))
+         {
+             Undo();
+         }
+         
         //Loops through every box.
         foreach (var startBox in boxes)
         {
@@ -123,10 +129,16 @@ public class LevelHandler : MonoBehaviour
     public void Reset()
     {
         timer.Reset();
+
+        foreach (var playerPosition in _boxHandler.playerPositions)
+        {
+            playerPosition.target = playerPosition.positionHistory[0];
+            playerPosition.positionHistory.Clear();
+            playerPosition.positionHistory.Add(playerPosition.target);
+        }
+        
         //Finds initial position in undo list.
-        _boxHandler.playerPosition.target = _boxHandler.playerPosition.positionHistory[0];
-        _boxHandler.playerPosition.positionHistory.Clear();
-        _boxHandler.playerPosition.positionHistory.Add(_boxHandler.playerPosition.target);
+        
 
 
         //Gets boxes in current level.
@@ -140,23 +152,29 @@ public class LevelHandler : MonoBehaviour
     
     public void Undo()
     {
-            //Checks if in initial position
-            if (_boxHandler.playerPosition.positionHistory.Count == 1)
+        foreach (var playerPosition in _boxHandler.playerPositions)
+        {
+            if (playerPosition.positionHistory.Count == 1)
             {
-                return;
+                continue;
             }
 
             //Finds the previous position of every box and changes their target position back to them.
             //Removes the current position from the list
-            _boxHandler.playerPosition.target = _boxHandler.playerPosition.positionHistory[^2];
-            _boxHandler.playerPosition.positionHistory
-                .RemoveAt(_boxHandler.playerPosition.positionHistory.Count - 1);
-
-            foreach (var box in _boxHandler.boxes)
+            playerPosition.target = playerPosition.positionHistory[^2];
+            playerPosition.positionHistory
+                .RemoveAt(playerPosition.positionHistory.Count - 1);
+        }
+        
+        foreach (var box in _boxHandler.boxes)
+        {
+            if (box.positionHistory.Count == 1)
             {
-                box.target = box.positionHistory[^2];
-                box.positionHistory.RemoveAt(box.positionHistory.Count-1);
+                break;
             }
+            box.target = box.positionHistory[^2];
+            box.positionHistory.RemoveAt(box.positionHistory.Count-1);
+        }
     }
     
     // Bound in Player Input
