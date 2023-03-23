@@ -437,6 +437,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2 Position
       objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.g
+      value: 0.29005396
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.r
+      value: 0.16509432
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
 --- !u!4 &491734393 stripped
@@ -750,6 +762,18 @@ PrefabInstance:
     - target: {fileID: 2257989129776823037, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
       propertyPath: m_Name
       value: Player Position
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2688679
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2688679
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597229045774831467, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
