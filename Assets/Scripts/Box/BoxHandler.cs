@@ -13,6 +13,7 @@ public class BoxHandler : MonoBehaviour
     
     //Box lists for each type that needs it.
     public Box[] boxes;
+    public bool inBetweenMoves;
     private List<Box> _falling = new List<Box>();
     private List<Box> _linked = new List<Box>();
 
@@ -177,10 +178,15 @@ public class BoxHandler : MonoBehaviour
         //Checks walls and the box pushing stuff above.
         private void CalculateMovementPlayer(GridPosition curPlayer)
         {
-            var inputVector = curPlayer == playerPositions.First() ? _inputVector : _inputVectorPlayer2;
+            if (Vector2.Distance(curPlayer.current, curPlayer.target) > .05f)
+            {
+                inBetweenMoves = true;
+            }
             
+            var inputVector = curPlayer == playerPositions.First() ? _inputVector : _inputVectorPlayer2;
+
             if (!(Vector2.Distance(curPlayer.current, curPlayer.target) <= .05f) || inputVector == Vector2.zero) return;
-            var moveVector = CalcMoveVector(inputVector);
+                var moveVector = CalcMoveVector(inputVector);
             if (moveVector == Vector2.zero) return;
             
             var canMovePlayer = true;
@@ -255,6 +261,7 @@ public class BoxHandler : MonoBehaviour
     
         private void Update()
         {
+            inBetweenMoves = false;
             if (LevelHandler.inputEnabled)
             {
                 _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

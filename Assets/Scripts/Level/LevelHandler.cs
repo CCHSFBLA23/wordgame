@@ -56,7 +56,7 @@ public class LevelHandler : MonoBehaviour
     //Every frame checks if the level is solved.
      private void Update()
      {
-         if (Input.GetKeyDown(KeyCode.Z))
+         if (Input.GetKey(KeyCode.Z) && !_boxHandler.inBetweenMoves)
          {
              Undo();
          }
