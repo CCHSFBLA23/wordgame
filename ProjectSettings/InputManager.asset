@@ -19,8 +19,8 @@ InputManager:
     snap: 1
     invert: 0
     type: 0
-    axis: 0
-    joyNum: 1
+    axis: 5
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
     descriptiveName: 
@@ -35,8 +35,8 @@ InputManager:
     snap: 1
     invert: 0
     type: 0
-    axis: 1
-    joyNum: 1
+    axis: 5
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
     descriptiveName: 
@@ -499,8 +499,8 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 0
-    joyNum: 2
+    axis: 5
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical 2
     descriptiveName: 
@@ -515,6 +515,6 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 1
-    joyNum: 2
+    axis: 5
+    joyNum: 0
   m_UsePhysicalKeys: 0

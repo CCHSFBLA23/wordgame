@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class LevelHandler : MonoBehaviour
     [Header("Level Properties")]
     [SerializeField] public string goalWord;
     [SerializeField] public string levelTitle;
+    [HideInInspector] public bool lastLevelInSeries;
     public bool solved = false;
     public static bool inputEnabled = true;
     public bool isSinglePlayer;
@@ -22,6 +24,7 @@ public class LevelHandler : MonoBehaviour
 
     private LevelEndController _levelEndController;
     private SceneHandler _sceneHandler;
+    
     public Box[] boxes;
     
     //Ran at start of level.

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelEndController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class LevelEndController : MonoBehaviour
         levelTitleText.text = levelHandler.GetTitle();
         time.text = timer.GetTimerText();
         highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
+        if (levelHandler.lastLevelInSeries)
+        {
+            GameObject.FindGameObjectWithTag("NextButton").GetComponent<Button>().interactable = false;
+        }
     }
 
     public void Disable()

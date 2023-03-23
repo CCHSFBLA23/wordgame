@@ -195,13 +195,15 @@ public class BoxHandler : MonoBehaviour
             curPlayer.target += moveVector;
             AudioManager.Play("PlayerMove");
             
-            UpdateMoveHistory(curPlayer);
+            UpdateMoveHistory();
         }
 
-        private void UpdateMoveHistory(GridPosition curPlayer)
+        private void UpdateMoveHistory()
         {
-            curPlayer.positionHistory.Add(curPlayer.target);
-            if (curPlayer != playerPositions.First()) return;
+            foreach (var curPlayer in playerPositions)
+            {
+                curPlayer.positionHistory.Add(curPlayer.target);
+            }
             foreach (var box in boxes)
             {
                 box.positionHistory.Add(box.target);

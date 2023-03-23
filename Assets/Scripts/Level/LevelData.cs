@@ -9,6 +9,7 @@ namespace Level
         public string goalWord;
         public bool isSinglePlayer;
 
+        public bool lastLevelInSeries;
         public int buildIndex;
     }
 }
