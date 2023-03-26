@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxes: []
+  inBetweenMoves: 0
   playerPositions:
   - {fileID: 2547390686219542969}
   walls: {fileID: 0}
@@ -4163,7 +4164,7 @@ MonoBehaviour:
   m_fontSizeMin: 0.0001
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0

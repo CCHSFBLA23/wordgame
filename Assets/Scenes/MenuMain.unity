@@ -11209,7 +11209,7 @@ GameObject:
   - component: {fileID: 483003291}
   - component: {fileID: 483003290}
   m_Layer: 5
-  m_Name: Block Types Label (1)
+  m_Name: General Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16206,8 +16206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The riddle is given before each level, and can be found again by pressing
-    pause.
+  m_text: The riddle is shown at the top of each level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
@@ -21399,7 +21398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move boxes so that they spell the answer to riddle.
+  m_text: Move boxes so that they spell the solution.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
   m_sharedMaterial: {fileID: 3016085605270362283, guid: 7a7120075c649ee49a44441a910403c5, type: 2}
