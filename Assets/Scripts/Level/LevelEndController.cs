@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LevelEndController : MonoBehaviour
 {
+    public TMP_Text commendationText;
     public TMP_Text levelTitleText;
     public TMP_Text highScoreText;
     public TMP_Text time;
@@ -13,10 +14,12 @@ public class LevelEndController : MonoBehaviour
     public GameObject levelEndCanvasParent;
     public LevelHandler levelHandler;
     public Timer timer;
+    public string[] commendations;
 
     public void Enable()
     {
         levelEndCanvasParent.SetActive(true);
+        commendationText.text = GenerateCommendation();
         levelTitleText.text = levelHandler.GetTitle();
         time.text = timer.GetTimerText();
         highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
@@ -29,5 +32,10 @@ public class LevelEndController : MonoBehaviour
     public void Disable()
     {
         levelEndCanvasParent.SetActive(false);
+    }
+
+    private string GenerateCommendation()
+    {
+        return commendations[Random.Range(0, commendations.Length)];
     }
 }

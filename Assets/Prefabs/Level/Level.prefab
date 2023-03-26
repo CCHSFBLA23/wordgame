@@ -948,7 +948,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 72
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1357,12 +1357,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da39564a157c2244ae604e1ae1a5c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commendationText: {fileID: 3131714456679618629}
   levelTitleText: {fileID: 3131714456448624066}
   highScoreText: {fileID: 3131714457242825181}
   time: {fileID: 3131714457925376656}
   levelEndCanvasParent: {fileID: 3131714457438733887}
   levelHandler: {fileID: 3131714456612176776}
   timer: {fileID: 3131714457250368153}
+  commendations:
+  - Geat Job!
+  - Superb!
+  - Fantastic!
+  - Awesome!
 --- !u!1 &3131714456679618651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1381,7 @@ GameObject:
   - component: {fileID: 3131714456679618630}
   - component: {fileID: 3131714456679618629}
   m_Layer: 5
-  m_Name: LEVELCOMPLETETEXT
+  m_Name: Commendation Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2823,8 +2829,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131714457438733887}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.055677492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2835,7 +2841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.39537686, y: 0.4010412}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &3131714457438733882
