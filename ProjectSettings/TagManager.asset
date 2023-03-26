@@ -9,6 +9,7 @@ TagManager:
   - text
   - levelManager
   - FadeTransition
+  - NextButton
   layers:
   - Default
   - TransparentFX

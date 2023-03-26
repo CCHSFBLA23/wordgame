@@ -4555,8 +4555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1616670148008058414, guid: 080171995f1cfc4428c617f35f45b04b, type: 3}
   sceneHandler: {fileID: 215547274}
-  isForSinglePlayer: 0
-  levels: []
+  levels:
+  - {fileID: 11400000, guid: 3328bba2ec425bd4d937b9d13a48567c, type: 2}
 --- !u!114 &215547276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40920,9 +40920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1616670148008058414, guid: 080171995f1cfc4428c617f35f45b04b, type: 3}
   sceneHandler: {fileID: 2049070042}
-  isForSinglePlayer: 1
-  levels:
-  - {fileID: 11400000, guid: 2e576154af963e44a974e2b0a7ee3882, type: 2}
+  levels: []
 --- !u!114 &2049070042
 MonoBehaviour:
   m_ObjectHideFlags: 0

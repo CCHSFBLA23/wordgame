@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Vector2 = UnityEngine.Vector2;
@@ -10,19 +11,19 @@ public class BoxHandler : MonoBehaviour
     //Mainly where I am planning to work on most of the game physics.
     //could possibly break into separate classes, but I think it would just be annoying to maintain
     
-    //Game Objects
-    public GameObject player;
     //Box lists for each type that needs it.
     public Box[] boxes;
+    public bool inBetweenMoves;
     private List<Box> _falling = new List<Box>();
     private List<Box> _linked = new List<Box>();
 
     private LevelHandler _levelHandler;
-    public GridPosition playerPosition;
+    public List<GridPosition> playerPositions;
     public Tilemap walls;
     
     //Input Manager
     private Vector2 _inputVector;
+    private Vector2 _inputVectorPlayer2;
     
 
 
@@ -45,9 +46,16 @@ public class BoxHandler : MonoBehaviour
     
     //Checks if there is a tile in the Walls tilemap at the position that is about to be moved to.
     //Returns true if there is a tile there.
-    private bool CheckWallCollisions(Vector2 position, Vector2 moveVector)
+    private bool CheckWallAndPlayerCollisions(Vector2 position, Vector2 moveVector)
     {
+        
+        
         Vector2 destination = position + moveVector;
+        
+        foreach (var playerPosition in playerPositions)
+        {
+            if (playerPosition.target == destination) return true;
+        }
         
         return walls.GetTile(Vector3Int.FloorToInt(destination));
     }
@@ -56,6 +64,7 @@ public class BoxHandler : MonoBehaviour
     //Returns either a reference to the object or null.
     public bool CheckBoxCollision(Vector2 position, Vector2 moveVector, out Box collidedBox)
     {
+        
         foreach (var t in boxes)
         {
             if (t.target != position + moveVector) continue;
@@ -83,9 +92,19 @@ public class BoxHandler : MonoBehaviour
     //And so on until you hit a wall or run out of boxes.
     //Returns true if the player can move.
     //If there is not a wall, it will move every box in the row.
-    private bool PushRowOfBoxes(Vector2 position, Vector2 moveVector)
+    private bool PushRowOfBoxes(GridPosition curPlayer, Vector2 position, Vector2 moveVector)
     {
         var toPush = new List<Box>();
+        
+        foreach (var playerPosition in playerPositions)
+        {
+            Debug.Log("Player Position: " + playerPosition.target);
+            Debug.Log("Box Target: " + (position + moveVector));
+            
+            if (playerPosition.target != position + moveVector) continue;
+            return false;
+        }
+        
         if (CheckBoxCollision(position, moveVector, out var cur))
         {
             if (!cur.pushable) return false;
@@ -100,11 +119,11 @@ public class BoxHandler : MonoBehaviour
         while (CheckBoxCollision(cur.target, moveVector, out cur))
         {
             if (!cur.pushable) return false;
-            if (cur.target == playerPosition.target) return false;
+            if (cur.target == curPlayer.target) return false;
             toPush.Add(cur);
         }
 
-        if (toPush.Any() && CheckWallCollisions(toPush.Last().target, moveVector))
+        if (toPush.Any() && CheckWallAndPlayerCollisions(toPush.Last().target, moveVector))
         {
             return false;
         }
@@ -120,7 +139,7 @@ public class BoxHandler : MonoBehaviour
                     if (!toPush.Contains(box) && !moved && !box.linkedMoved)
                     {
                         box.linkedMoved = true;
-                        PushRowOfBoxes(box.target - moveVector, moveVector);
+                        PushRowOfBoxes(curPlayer, box.target - moveVector, moveVector);
                     }
                 }
                 moved = true;
@@ -157,30 +176,40 @@ public class BoxHandler : MonoBehaviour
 
         //Deals with sending input to the player target (aka preventing it from jumping around).
         //Checks walls and the box pushing stuff above.
-        private void CalculateMovementPlayer()
+        private void CalculateMovementPlayer(GridPosition curPlayer)
         {
-            if (!(Vector2.Distance(playerPosition.current, playerPosition.target) <= .05f) || _inputVector == Vector2.zero) return;
-            var moveVector = CalcMoveVector(_inputVector);
+            if (Vector2.Distance(curPlayer.current, curPlayer.target) > .05f)
+            {
+                inBetweenMoves = true;
+            }
+            
+            var inputVector = curPlayer == playerPositions.First() ? _inputVector : _inputVectorPlayer2;
+
+            if (!(Vector2.Distance(curPlayer.current, curPlayer.target) <= .05f) || inputVector == Vector2.zero) return;
+                var moveVector = CalcMoveVector(inputVector);
             if (moveVector == Vector2.zero) return;
             
             var canMovePlayer = true;
-            if (CheckBoxCollision(playerPosition.target, moveVector))
+            if (CheckBoxCollision(curPlayer.target, moveVector))
             {
                 //Checks if the original box pushed is a linked box.
-                canMovePlayer = PushRowOfBoxes(playerPosition.target, moveVector);
+                canMovePlayer = PushRowOfBoxes(curPlayer, curPlayer.target, moveVector);
             }
 
-            if (CheckWallCollisions(playerPosition.target, moveVector) || !canMovePlayer) return;
-            PullRowOfBoxes(playerPosition.target, moveVector);
-            playerPosition.target += moveVector;
+            if (CheckWallAndPlayerCollisions(curPlayer.target, moveVector) || !canMovePlayer) return;
+            PullRowOfBoxes(curPlayer.target, moveVector);
+            curPlayer.target += moveVector;
             AudioManager.Play("PlayerMove");
-
+            
             UpdateMoveHistory();
         }
 
         private void UpdateMoveHistory()
         {
-            playerPosition.positionHistory.Add(playerPosition.target);
+            foreach (var curPlayer in playerPositions)
+            {
+                curPlayer.positionHistory.Add(curPlayer.target);
+            }
             foreach (var box in boxes)
             {
                 box.positionHistory.Add(box.target);
@@ -194,14 +223,13 @@ public class BoxHandler : MonoBehaviour
             
                 if(Vector2.Distance(box.target, box.current) > 0.1f) return;
                 Vector2 cur = box.target;
-                if (cur + Vector2.down == playerPosition.target) return;
+                if (cur + Vector2.down == playerPositions.First().target) return;
 
                 while (true)
                 {
                 
-                    if (CheckWallCollisions(cur, Vector2.down)) break;
+                    if (CheckWallAndPlayerCollisions(cur, Vector2.down)) break;
                     if (CheckBoxCollision(cur, Vector2.down)) break;
-                    if (playerPosition.target == cur + Vector2.down) break;
                     cur += Vector2.down;
                 }
                 box.target = cur;
@@ -233,13 +261,19 @@ public class BoxHandler : MonoBehaviour
     
         private void Update()
         {
+            inBetweenMoves = false;
             if (LevelHandler.inputEnabled)
             {
                 _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                if (!_levelHandler.isSinglePlayer)
+                {
+                    _inputVectorPlayer2 = new Vector2(Input.GetAxisRaw("Horizontal 2"), Input.GetAxisRaw("Vertical 2"));
+                }
             }
             else
             {
                 _inputVector = Vector2.zero;
+                _inputVectorPlayer2 = Vector2.zero;
             }
             
             _falling = new List<Box>();
@@ -258,8 +292,12 @@ public class BoxHandler : MonoBehaviour
                     _linked.Add(box);
                 }
             }
-            
-            CalculateMovementPlayer();
+
+            foreach (var playerPosition in playerPositions)
+            {
+                
+                CalculateMovementPlayer(playerPosition);
+            }
             CalculateFallingMovement();
 
         }

@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuMain.unity
     guid: 9de50c913c9ad4742806de21416edf3f
   - enabled: 1
-    path: Assets/Scenes/Level Template.unity
-    guid: 586dcdb34d777f74c9fc6d93fa8180a1
-  - enabled: 1
-    path: Assets/Scenes/Level Template 2.unity
-    guid: a1fec91168fb036458c18a3121965e9c
+    path: Assets/Levels/Multiplayer/Level 1/Multiplayer Level 1.unity
+    guid: 1ea12e3855c215b43852ff74b433879d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
