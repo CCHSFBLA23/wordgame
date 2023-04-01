@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuMain.unity
     guid: 9de50c913c9ad4742806de21416edf3f
   - enabled: 1
+    path: Assets/Levels/Singleplayer/Basic Level 2/Basic Level 2.unity
+    guid: 882ed86061a2d1146a0bd9927a038b3b
+  - enabled: 1
+    path: Assets/Levels/Singleplayer/Basic Level 3/Basic Level 3.unity
+    guid: 8de4cc4ee6af2f4418e583607efc9477
+  - enabled: 1
+    path: Assets/Levels/Singleplayer/Heavy Level 1/Heavy Level 1.unity
+    guid: eaa16136a55812246965882b64134826
+  - enabled: 1
     path: Assets/Levels/Multiplayer/Level 1/Multiplayer Level 1.unity
     guid: 1ea12e3855c215b43852ff74b433879d
   - enabled: 0
