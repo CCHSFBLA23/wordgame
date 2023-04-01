@@ -18,11 +18,11 @@ namespace Level
         public GameObject levelPrefab;
         public GameObject playerPrefab;
         public Tilemap walls;
-    
+
         //Hardcoded Colors Bad Someone Change Later
-        private readonly Color _playerOneColor = Color.red; 
-        private readonly Color _playerTwoColor = Color.blue;
-    
+        private Color32 _playerOneColor = new Color32(255, 189, 89, 255);
+        private Color _playerTwoColor = new Color32(126, 217, 87, 255);
+
         void Start()
         {
             if (levelData == null)

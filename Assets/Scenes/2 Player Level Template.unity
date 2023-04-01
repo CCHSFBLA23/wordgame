@@ -311,6 +311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heavy Box
       objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: 0ffd2bd580a62ce42a0830eddd7a3fc3, type: 3}
+      propertyPath: m_Color.b
+      value: 0.48235297
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ffd2bd580a62ce42a0830eddd7a3fc3, type: 3}
 --- !u!1001 &457672925
@@ -375,6 +379,10 @@ PrefabInstance:
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.b
       value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
+      propertyPath: m_Color.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.r
@@ -507,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.58642006
       objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: a66eb99e70385d8479fb12dc6057aeed, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a66eb99e70385d8479fb12dc6057aeed, type: 3}
 --- !u!1001 &505680023
@@ -571,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.b
       value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
+      propertyPath: m_Color.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.r
@@ -705,7 +721,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 632307026539341911, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 632307026539341911, guid: 7a80c95d2d08bd844ae58a9a32455252, type: 3}
       propertyPath: m_LocalPosition.x
@@ -927,6 +943,10 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.58642006
       objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: a66eb99e70385d8479fb12dc6057aeed, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a66eb99e70385d8479fb12dc6057aeed, type: 3}
 --- !u!4 &725636970 stripped
@@ -1120,8 +1140,16 @@ PrefabInstance:
       value: Falling Box
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: 409d99ea339fa6749ab1eb2c2e6f7dc2, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: 409d99ea339fa6749ab1eb2c2e6f7dc2, type: 3}
       propertyPath: m_Color.g
       value: 0.43554688
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194016850709582863, guid: 409d99ea339fa6749ab1eb2c2e6f7dc2, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 409d99ea339fa6749ab1eb2c2e6f7dc2, type: 3}
@@ -1221,6 +1249,7 @@ MonoBehaviour:
   levelPrefab: {fileID: 3131714457918850062, guid: 554cd350f1d08af4cb66501c69c62483, type: 3}
   playerPrefab: {fileID: 5045126264124756600, guid: d2b43c86da190a34892893cc05697be2, type: 3}
   walls: {fileID: 1798496843}
+  _playerTwoColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &1310360918
 Transform:
   m_ObjectHideFlags: 0
