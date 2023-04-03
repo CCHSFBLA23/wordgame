@@ -219,9 +219,9 @@ public class BoxHandler : MonoBehaviour
             foreach (var box in _falling)
             {
             
-                if(Vector2.Distance(box.target, box.current) > 0.1f) return;
+                if(Vector2.Distance(box.target, box.current) > 0.1f) continue;
                 Vector2 cur = box.target;
-                if (cur + Vector2.down == playerPositions.First().target) return;
+                if (cur + Vector2.down == playerPositions.First().target) continue;
 
                 while (true)
                 {

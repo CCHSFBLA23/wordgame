@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a4d66dcbbf4871b94d963ddfa99960, type: 3}
   m_Name: Linked Level 1
   m_EditorClassIdentifier: 
-  levelName: don't ____ it
-  goalWord: push
+  levelName: chain-link _____
+  goalWord: fence
   isSinglePlayer: 1
   lastLevelInSeries: 1
   buildIndex: 4

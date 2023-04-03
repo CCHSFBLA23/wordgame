@@ -1733,10 +1733,11 @@ MonoBehaviour:
   levelHandler: {fileID: 3131714456612176776}
   timer: {fileID: 3131714457250368153}
   commendations:
-  - Geat Job!
+  - Great Job!
   - Superb!
   - Fantastic!
   - Awesome!
+  - Good Job!
 --- !u!1 &3131714456679618651
 GameObject:
   m_ObjectHideFlags: 0
