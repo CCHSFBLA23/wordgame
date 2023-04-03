@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3845d584a0f63247bc425427b11e4b3, type: 3}
   m_Name: Linked
   m_EditorClassIdentifier: 
-  boxColor: {r: 0.39319795, g: 0, b: 0.5849056, a: 1}
+  boxColor: {r: 0.54509807, g: 0.32156864, b: 1, a: 1}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   pushable: 1
   pullable: 0

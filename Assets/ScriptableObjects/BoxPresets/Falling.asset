@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3845d584a0f63247bc425427b11e4b3, type: 3}
   m_Name: Falling
   m_EditorClassIdentifier: 
-  boxColor: {r: 0, g: 0.43554688, b: 1, a: 1}
+  boxColor: {r: 0.047058824, g: 0.7490196, b: 0.85882354, a: 1}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   pushable: 1
   pullable: 0
@@ -20,3 +20,4 @@ MonoBehaviour:
   falling: 1
   moving: 0
   sticky: 0
+  linked: 0
