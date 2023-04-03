@@ -189,7 +189,7 @@ public class LevelHandler : MonoBehaviour
         // Checks if there is a high score.
         if (savedScore != null)
         {
-            if (savedScore.seconds < currentAttempt.seconds)
+            if (savedScore.seconds > currentAttempt.seconds)
             {
                 SaveSystem.SaveLevelData(currentAttempt, isSinglePlayer);
                 Debug.Log("New time to beat is: " + SaveSystem.LoadLevelScore(currentAttempt, isSinglePlayer).ToString(@"mm\:ss"));

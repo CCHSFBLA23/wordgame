@@ -199,7 +199,7 @@ public class BoxHandler : MonoBehaviour
             if (CheckWallAndPlayerCollisions(curPlayer.target, moveVector) || !canMovePlayer) return;
             PullRowOfBoxes(curPlayer.target, moveVector);
             curPlayer.target += moveVector;
-            AudioManager.Play("PlayerMove");
+            AudioManager.Play("PlayerMove", true);
             
             UpdateMoveHistory();
         }
