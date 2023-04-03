@@ -46,15 +46,13 @@ public class BoxHandler : MonoBehaviour
     
     //Checks if there is a tile in the Walls tilemap at the position that is about to be moved to.
     //Returns true if there is a tile there.
-    private bool CheckWallAndPlayerCollisions(Vector2 position, Vector2 moveVector)
+    private bool CheckWallAndPlayerCollisions(GridPosition current, Vector2 position, Vector2 moveVector)
     {
-        
-        
         Vector2 destination = position + moveVector;
         
         foreach (var playerPosition in playerPositions)
         {
-            if (playerPosition.target == destination) return true;
+            if (playerPosition.target == destination && playerPosition != current) return true;
         }
         
         return walls.GetTile(Vector3Int.FloorToInt(destination));
@@ -123,7 +121,7 @@ public class BoxHandler : MonoBehaviour
             toPush.Add(cur);
         }
 
-        if (toPush.Any() && CheckWallAndPlayerCollisions(toPush.Last().target, moveVector))
+        if (toPush.Any() && CheckWallAndPlayerCollisions(curPlayer, toPush.Last().target, moveVector))
         {
             return false;
         }
@@ -196,7 +194,7 @@ public class BoxHandler : MonoBehaviour
                 canMovePlayer = PushRowOfBoxes(curPlayer, curPlayer.target, moveVector);
             }
 
-            if (CheckWallAndPlayerCollisions(curPlayer.target, moveVector) || !canMovePlayer) return;
+            if (CheckWallAndPlayerCollisions(curPlayer, curPlayer.target, moveVector) || !canMovePlayer) return;
             PullRowOfBoxes(curPlayer.target, moveVector);
             curPlayer.target += moveVector;
             AudioManager.Play("PlayerMove", true);
@@ -228,7 +226,7 @@ public class BoxHandler : MonoBehaviour
                 while (true)
                 {
                 
-                    if (CheckWallAndPlayerCollisions(cur, Vector2.down)) break;
+                    if (CheckWallAndPlayerCollisions(null, cur, Vector2.down)) break;
                     if (CheckBoxCollision(cur, Vector2.down)) break;
                     cur += Vector2.down;
                 }

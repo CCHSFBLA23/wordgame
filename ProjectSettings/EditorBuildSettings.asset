@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Levels/Singleplayer/Heavy Level 1/Heavy Level 1.unity
     guid: eaa16136a55812246965882b64134826
   - enabled: 1
+    path: Assets/Levels/Singleplayer/Linked Level 1/Linked Level 1.unity
+    guid: 7a362eb8d27a46a42b42763ada04e4f4
+  - enabled: 1
     path: Assets/Levels/Multiplayer/Level 1/Multiplayer Level 1.unity
     guid: 1ea12e3855c215b43852ff74b433879d
   - enabled: 0
