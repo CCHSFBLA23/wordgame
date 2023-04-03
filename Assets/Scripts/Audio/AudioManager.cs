@@ -60,4 +60,30 @@ public class AudioManager : MonoBehaviour
             Debug.Log("The sound: " + title + " does not exist.");
         }
     }
+
+    public static void Play(string title, bool vary)
+    {
+        try
+        {
+            Sound s = Array.Find(soundRecords, sound => sound.name == title);
+            OptionsData values = SaveSystem.LoadOptionsData();
+
+            if (values != null)
+            {
+                if (s.isMusic)
+                    s.source.volume = UnityEngine.Random.Range(values.musicVolume - 0.3f, values.musicVolume);
+                else
+                    s.source.volume = UnityEngine.Random.Range(values.effectsVolume - 0.3f, values.effectsVolume);
+            }
+            else // default to exact masterVolume value
+                s.source.volume = AudioListener.volume;
+
+            s.source.pitch = UnityEngine.Random.Range(s.source.pitch - 0.01f, s.source.pitch + 0.01f);
+            s.source.Play();
+        }
+        catch
+        {
+            Debug.Log("The sound: " + title + " does not exist.");
+        }
+    }
 }
