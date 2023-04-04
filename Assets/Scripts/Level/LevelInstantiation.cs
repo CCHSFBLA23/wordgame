@@ -23,7 +23,7 @@ namespace Level
         private Color32 _playerOneColor = new Color32(255, 189, 89, 255);
         private Color _playerTwoColor = new Color32(126, 217, 87, 255);
 
-        void Start()
+        void Awake()
         {
             if (levelData == null)
             {
