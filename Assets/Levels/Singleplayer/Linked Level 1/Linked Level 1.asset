@@ -15,5 +15,5 @@ MonoBehaviour:
   levelName: chain-link _____
   goalWord: fence
   isSinglePlayer: 1
-  lastLevelInSeries: 1
+  lastLevelInSeries: 0
   buildIndex: 4
