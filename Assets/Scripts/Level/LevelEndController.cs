@@ -23,9 +23,9 @@ public class LevelEndController : MonoBehaviour
         levelTitleText.text = levelHandler.GetTitle();
         time.text = timer.GetTimerText();
         highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
-        if (levelHandler.lastLevelInSeries)
+        if (!levelHandler.lastLevelInSeries)
         {
-            GameObject.FindGameObjectWithTag("NextButton").GetComponent<Button>().interactable = false;
+            GameObject.FindGameObjectWithTag("NextButton").GetComponent<Button>().interactable = true;
         }
     }
 

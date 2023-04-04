@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3845d584a0f63247bc425427b11e4b3, type: 3}
   m_Name: Heavy
   m_EditorClassIdentifier: 
-  boxColor: {r: 0.36862746, g: 0.37647063, b: 0.48235297, a: 1}
+  boxColor: {r: 0.36862746, g: 0.37647063, b: 0.47843137, a: 1}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   pushable: 0
+  pullable: 0
+  weak: 0
+  falling: 0
+  moving: 0
+  sticky: 0
+  linked: 0

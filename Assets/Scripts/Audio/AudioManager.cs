@@ -70,15 +70,26 @@ public class AudioManager : MonoBehaviour
 
             if (values != null)
             {
+
                 if (s.isMusic)
-                    s.source.volume = UnityEngine.Random.Range(values.musicVolume - 0.3f, values.musicVolume);
+                {
+                    float range = values.musicVolume * 0.3f;
+                    s.source.volume = UnityEngine.Random.Range(values.musicVolume - range, values.musicVolume);
+                }
+
                 else
-                    s.source.volume = UnityEngine.Random.Range(values.effectsVolume - 0.3f, values.effectsVolume);
+                {
+                    float range = values.effectsVolume * 0.3f;
+                    s.source.volume = UnityEngine.Random.Range(values.effectsVolume - range, values.effectsVolume);
+                }
+                    
             }
             else // default to exact masterVolume value
                 s.source.volume = AudioListener.volume;
 
-            s.source.pitch = UnityEngine.Random.Range(s.source.pitch - 0.01f, s.source.pitch + 0.01f);
+            var pitch = s.source.pitch;
+            float pitchRange = pitch * .01f;
+            s.source.pitch = UnityEngine.Random.Range(pitch - pitchRange, pitch + pitchRange);
             s.source.Play();
         }
         catch

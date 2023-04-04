@@ -11,7 +11,7 @@ public class LevelSelection : MonoBehaviour
     public SceneHandler sceneHandler;
     public LevelData[] levels;
 
-    private void Awake()
+    private void Start()
     {
         levelCount = levels.Length;
 
@@ -30,18 +30,16 @@ public class LevelSelection : MonoBehaviour
         foreach (var level in levels)
         {
             GameObject button = Instantiate(levelButton, this.transform);
+            button.gameObject.SetActive(false);
             button.GetComponentInChildren<TMP_Text>().text = (index + 1).ToString();
 
             if (index < availableLevelIndex)
             {
+                button.GetComponent<Button>().interactable = true;
                 button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
                 button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(level.buildIndex));
             }
-            else
-            {
-                button.GetComponent<Button>().interactable = false;
-            }
-
+            button.gameObject.SetActive(true);
             index++;
         }
     }
