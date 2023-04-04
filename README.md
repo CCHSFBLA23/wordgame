@@ -1,5 +1,5 @@
 # ![WordBox](WordGame.png)
-###  *A word puzzle game where you moves boxes to form words*
+###  *A word puzzle game where you move boxes to form words*
 CCHS FBLA 2023 Computer Game & Simulation Programming
 ___
 
