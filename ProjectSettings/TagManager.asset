@@ -10,6 +10,8 @@ TagManager:
   - levelManager
   - FadeTransition
   - NextButton
+  - ResetButton
+  - PauseButton
   layers:
   - Default
   - TransparentFX

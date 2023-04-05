@@ -31,9 +31,8 @@ public class Box : GridPosition
 
     [HideInInspector] public bool linkedMoved = false;
     
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _text = GetComponentInChildren<TMP_Text>();
         UpdateVisualsAndProperties();

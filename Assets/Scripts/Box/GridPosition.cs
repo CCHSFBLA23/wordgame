@@ -27,11 +27,6 @@ public class GridPosition : MonoBehaviour
             positionHistory.Add(current);
         }
     }
-
-    protected virtual void Start()
-    {
-        
-    }
     
     protected virtual void Update()
     {
