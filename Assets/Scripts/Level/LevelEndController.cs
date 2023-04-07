@@ -26,7 +26,7 @@ public class LevelEndController : MonoBehaviour
         highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
         if (time.text == highScoreText.text.Substring(12))
         {
-            newHighScoreIndicator.SetActive(true);
+            StartCoroutine(SceneHandler.delay(0.2f, () => { AudioManager.Play("HighScore"); newHighScoreIndicator.SetActive(true); }));
         }
         if (!levelHandler.lastLevelInSeries)
         {

@@ -42,7 +42,7 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    public IEnumerator delay(float length, Action functionToDelay)
+    public static IEnumerator delay(float length, Action functionToDelay)
     {
         yield return new WaitForSeconds(length);
         functionToDelay();
