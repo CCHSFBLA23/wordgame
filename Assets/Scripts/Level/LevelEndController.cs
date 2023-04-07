@@ -12,6 +12,7 @@ public class LevelEndController : MonoBehaviour
     public TMP_Text time;
     
     public GameObject levelEndCanvasParent;
+    public GameObject newHighScoreIndicator;
     public LevelHandler levelHandler;
     public Timer timer;
     public string[] commendations;
@@ -23,6 +24,10 @@ public class LevelEndController : MonoBehaviour
         levelTitleText.text = levelHandler.GetTitle();
         time.text = timer.GetTimerText();
         highScoreText.text = "HIGH SCORE: " + SaveSystem.LoadLevelScore(new LevelSaveData(levelHandler.buildIndex, levelHandler.timer.GetTimerSeconds()), levelHandler.isSinglePlayer).ToString(@"mm\:ss");
+        if (time.text == highScoreText.text.Substring(12))
+        {
+            newHighScoreIndicator.SetActive(true);
+        }
         if (!levelHandler.lastLevelInSeries)
         {
             GameObject.FindGameObjectWithTag("NextButton").GetComponent<Button>().interactable = true;
@@ -32,6 +37,7 @@ public class LevelEndController : MonoBehaviour
     public void Disable()
     {
         levelEndCanvasParent.SetActive(false);
+        newHighScoreIndicator.SetActive(false);
     }
 
     private string GenerateCommendation()
