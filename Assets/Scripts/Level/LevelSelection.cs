@@ -9,12 +9,11 @@ public class LevelSelection : MonoBehaviour
     private int levelCount;
     public GameObject levelButton;
     public SceneHandler sceneHandler;
-    public LevelData[] levels;
+    public LevelList list;
 
     private void Start()
     {
-        levelCount = levels.Length;
-
+        LevelData[] levels = list.levels;
         int availableLevelIndex = 1;
         for(int i = 2; i <= levelCount; i++)
         {
@@ -37,11 +36,17 @@ public class LevelSelection : MonoBehaviour
             {
                 button.GetComponent<Button>().interactable = true;
                 button.GetComponent<Button>().onClick.AddListener(() => AudioManager.Play("Button"));
-                button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(level.buildIndex));
+                button.GetComponent<Button>().onClick.AddListener(() => GoToLevel(level.name));
             }
             button.gameObject.SetActive(true);
             index++;
         }
+    }
+
+    private void GoToLevel(string sceneName)
+    {
+        Debug.Log(sceneName);
+        sceneHandler.LoadScene(sceneName);
     }
 
     private void GoToLevel(int levelIndex)

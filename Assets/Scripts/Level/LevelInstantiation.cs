@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -34,23 +35,29 @@ namespace Level
             GameObject level = Instantiate(levelPrefab);
             LevelHandler levelHandler = level.GetComponentInChildren<LevelHandler>();
             BoxHandler boxHandler = level.GetComponentInChildren<BoxHandler>();
-
+            SceneHandler sceneHandler = level.GetComponentInChildren<SceneHandler>();
+            LevelListTypes levelListTypes = level.GetComponentInChildren<LevelListTypes>();
+            
+            
             levelHandler.levelTitle = levelData.levelName;
             levelHandler.goalWord = levelData.goalWord;
             levelHandler.isSinglePlayer = levelData.isSinglePlayer;
-
-            levelHandler.lastLevelInSeries = levelData.lastLevelInSeries;
+            
             
             var position = playerStartingPosition.position;
             var playerPosition = boxHandler.playerPositions.First();
             playerPosition.target = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
             playerPosition.positionHistory[0] = playerPosition.target;
-
+            
             Destroy(playerStartingPosition.gameObject);
-        
+
+            sceneHandler.cur = levelData;
+            sceneHandler.list = levelData.isSinglePlayer ? levelListTypes.singlePlayer : levelListTypes.multiPlayer;
+            levelHandler.lastLevelInSeries = sceneHandler.list.levels.Last() == levelData || !sceneHandler.list.levels.Contains(levelData);
+
             if (!levelData.isSinglePlayer)
             {
-            
+                
                 if (playerTwoStartingPosition == null)
                 {
                     Debug.LogError("Missing Player Two Starting Position. (Make sure IsSinglePlayer is set correctly!)");
