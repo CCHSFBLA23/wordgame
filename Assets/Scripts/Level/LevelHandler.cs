@@ -11,6 +11,7 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] public string goalWord;
     [SerializeField] public string levelTitle;
     [HideInInspector] public bool lastLevelInSeries;
+    [HideInInspector] public string levelName;
     public bool solved = false;
     public static bool inputEnabled = true;
     public bool isSinglePlayer;
@@ -34,7 +35,7 @@ public class LevelHandler : MonoBehaviour
         inputEnabled = false;
         timer.Pause();
         buildIndex = SceneManager.GetActiveScene().buildIndex;
-        AudioManager.Play($"Level {buildIndex}");
+        AudioManager.Play(levelName);
 
         //When enabled in editor will delete save file.
         if (debugResetOnStart)

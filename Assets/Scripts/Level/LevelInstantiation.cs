@@ -42,7 +42,7 @@ namespace Level
             levelHandler.levelTitle = levelData.levelName;
             levelHandler.goalWord = levelData.goalWord;
             levelHandler.isSinglePlayer = levelData.isSinglePlayer;
-            
+            levelHandler.levelName = levelData.name;
             
             var position = playerStartingPosition.position;
             var playerPosition = boxHandler.playerPositions.First();
