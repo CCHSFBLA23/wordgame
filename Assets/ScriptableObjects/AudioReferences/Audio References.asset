@@ -28,7 +28,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: PlayerMove
-    clip: {fileID: 8300000, guid: 90226cb5b6f74b1bb822407bbe15d043, type: 3}
+    clip: {fileID: 8300000, guid: d7ee489fa54939a48a2d9f9a64050ae3, type: 3}
     volume: 1
     pitch: 1
     isMusic: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
     isMusic: 1
     loop: 1
     source: {fileID: 0}
-  - name: Level 1
-    clip: {fileID: 8300000, guid: d8c7da54891b426db55df783b617ce01, type: 3}
+  - name: Tutorial Level
+    clip: {fileID: 8300000, guid: e05bd81ec0e6d15418bb64e666526386, type: 3}
     volume: 0.527
     pitch: 1
     isMusic: 1
@@ -69,22 +69,22 @@ MonoBehaviour:
     isMusic: 1
     loop: 1
     source: {fileID: 0}
-  - name: Level 5
-    clip: {fileID: 8300000, guid: e05bd81ec0e6d15418bb64e666526386, type: 3}
+  - name: Challenge Level 1
+    clip: {fileID: 8300000, guid: d1111efa332ae124885fdb26ece00ec9, type: 3}
     volume: 0.504
     pitch: 1
     isMusic: 1
     loop: 1
     source: {fileID: 0}
-  - name: Level 6
-    clip: {fileID: 8300000, guid: d1111efa332ae124885fdb26ece00ec9, type: 3}
+  - name: Multiplayer Level 1
+    clip: {fileID: 8300000, guid: bf5a4900b4a0ca540af5db567f2c04b0, type: 3}
     volume: 0.497
     pitch: 1
     isMusic: 1
     loop: 1
     source: {fileID: 0}
-  - name: Level 7
-    clip: {fileID: 8300000, guid: bf5a4900b4a0ca540af5db567f2c04b0, type: 3}
+  - name: Basic Level 2
+    clip: {fileID: 8300000, guid: e05bd81ec0e6d15418bb64e666526386, type: 3}
     volume: 0.602
     pitch: 1
     isMusic: 1
