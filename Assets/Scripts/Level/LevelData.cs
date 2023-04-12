@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -9,8 +8,8 @@ namespace Level
         public string levelName;
         public string goalWord;
         public bool isSinglePlayer;
-
-        public bool lastLevelInSeries;
+        
+        [HideInInspector] 
         public int buildIndex;
     }
 }

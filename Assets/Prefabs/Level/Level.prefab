@@ -1623,6 +1623,7 @@ GameObject:
   - component: {fileID: 3131714456612176777}
   - component: {fileID: 3131714456612176778}
   - component: {fileID: 3131714456612176779}
+  - component: {fileID: 8408471889148806090}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: levelManager
@@ -1696,6 +1697,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 1193078534976523843}
+  list: {fileID: 0}
+  cur: {fileID: 0}
 --- !u!114 &3131714456612176778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,6 +1741,20 @@ MonoBehaviour:
   - Fantastic!
   - Awesome!
   - Good Job!
+--- !u!114 &8408471889148806090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131714456612176780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e697658c420c4513a865d702557dbeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singlePlayer: {fileID: 11400000, guid: 771aaae33a378d54daa6b6c748e0216d, type: 2}
+  multiPlayer: {fileID: 11400000, guid: e6cbed4a49586184f8d32137e9e7a5bf, type: 2}
 --- !u!1 &3131714456679618651
 GameObject:
   m_ObjectHideFlags: 0
