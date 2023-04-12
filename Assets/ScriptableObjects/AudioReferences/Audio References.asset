@@ -28,7 +28,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: PlayerMove
-    clip: {fileID: 8300000, guid: 90226cb5b6f74b1bb822407bbe15d043, type: 3}
+    clip: {fileID: 8300000, guid: d7ee489fa54939a48a2d9f9a64050ae3, type: 3}
     volume: 1
     pitch: 1
     isMusic: 0
