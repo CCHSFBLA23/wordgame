@@ -111,3 +111,10 @@ MonoBehaviour:
     isMusic: 1
     loop: 1
     source: {fileID: 0}
+  - name: HighScore
+    clip: {fileID: 8300000, guid: 5a9e809bca000954686882c0fa43bffc, type: 3}
+    volume: 0.85
+    pitch: 1
+    isMusic: 0
+    loop: 0
+    source: {fileID: 0}

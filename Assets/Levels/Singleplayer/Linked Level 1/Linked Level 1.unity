@@ -260,15 +260,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.b
-      value: 0.5849056
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.32156864
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.r
-      value: 0.39319795
+      value: 0.54509807
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
@@ -322,7 +322,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -770,15 +770,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.b
-      value: 0.5849056
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.32156864
       objectReference: {fileID: 0}
     - target: {fileID: 9194016850709582863, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}
       propertyPath: m_Color.r
-      value: 0.39319795
+      value: 0.54509807
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb959fe26f7ef24408771633b6e9faf4, type: 3}

@@ -51,7 +51,7 @@ public class LevelHandler : MonoBehaviour
         GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
 
         // Timer
-        StartCoroutine(_sceneHandler.delay(0.4f, () => { inputEnabled = true; timer.Unpause(); }));
+        StartCoroutine(SceneHandler.delay(0.4f, () => { inputEnabled = true; timer.Unpause(); }));
     }
 
     //Every frame checks if the level is solved.
@@ -125,7 +125,7 @@ public class LevelHandler : MonoBehaviour
          timer.Pause();
          inputEnabled = false;
          AudioManager.Play("LevelComplete");
-         StartCoroutine(_sceneHandler.delay(0.4f, () => _levelEndController.Enable()));
+         StartCoroutine(SceneHandler.delay(0.4f, () => _levelEndController.Enable()));
          Debug.Log("level beat");
      }
     
