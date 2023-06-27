@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,29 +9,27 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] public string levelTitle;
     [HideInInspector] public bool lastLevelInSeries;
     [HideInInspector] public string levelName;
-    public bool solved = false;
+    public bool solved;
     public static bool inputEnabled = true;
     public bool isSinglePlayer;
-    
     private BoxHandler _boxHandler;
 
     [Header("Score Stuff")]
     public Timer timer;
     public int buildIndex;
-    public bool debugResetOnStart = false;
+    public bool debugResetOnStart;
 
     private LevelEndController _levelEndController;
-    private SceneHandler _sceneHandler;
-    
+
     public Box[] boxes;
     
-    //Ran at start of level.
     private void Start()
     {
         goalWord = goalWord.ToLower();
         inputEnabled = false;
         timer.Pause();
         buildIndex = SceneManager.GetActiveScene().buildIndex;
+        //Audio named after Scene name
         AudioManager.Play(levelName);
 
         //When enabled in editor will delete save file.
@@ -45,7 +40,6 @@ public class LevelHandler : MonoBehaviour
         
         _boxHandler = GetComponent<BoxHandler>();
         _levelEndController = GetComponent<LevelEndController>();
-        _sceneHandler = GetComponent<SceneHandler>();
 
         //Starts the animation for the fade in and out.
         GameObject.FindGameObjectWithTag("FadeTransition").GetComponent<Animator>().SetTrigger("FadeIn");
@@ -57,6 +51,7 @@ public class LevelHandler : MonoBehaviour
     //Every frame checks if the level is solved.
      private void Update()
      {
+         //Limits the rate of undo by waiting for the boxes to finish moving.
          if (Input.GetKey(KeyCode.Z) && !_boxHandler.inBetweenMoves)
          {
              Undo();
@@ -209,12 +204,5 @@ public class LevelHandler : MonoBehaviour
         return levelTitle;
     }
 
-    //public void togglePlayerInput(bool setActive)
-    //{
-    //    if (setActive)
-    //        GetComponent<PlayerInput>().ActivateInput();
-    //    else
-    //        GetComponent<PlayerInput>().DeactivateInput();
-    //}
 
 }

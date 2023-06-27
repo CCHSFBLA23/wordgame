@@ -43,7 +43,81 @@ public class BoxHandler : MonoBehaviour
     }
     //Moves back to beginning. Stores them in dictionary in the start.
     
+    //Handles both single and multiplayer gameplay.
+    private void Update()
+    {
+        //Limits input while boxes are moving in a direction.
+        inBetweenMoves = false;
+        if (LevelHandler.inputEnabled)
+        {
+            _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (!_levelHandler.isSinglePlayer)
+            {
+                _inputVectorPlayer2 = new Vector2(Input.GetAxisRaw("Horizontal 2"), Input.GetAxisRaw("Vertical 2"));
+            }
+        }
+        else
+        {
+            _inputVector = Vector2.zero;
+            _inputVectorPlayer2 = Vector2.zero;
+        }
+            
+        _falling = new List<Box>();
+        _linked = new List<Box>();
+            
+        foreach (var box in boxes)
+        {
+            if (box.falling)
+            {
+                _falling.Add(box);
+            }
+
+            if (box.linked)
+            {
+                box.linkedMoved = false;
+                _linked.Add(box);
+            }
+        }
+
+        foreach (var playerPosition in playerPositions)
+        {
+            CalculateMovementPlayer(playerPosition);
+        }
+        CalculateFallingMovement();
+
+    }
     
+    //Deals with sending input to the player target (aka preventing it from jumping around).
+    //Checks walls and the box pushing stuff above.
+    private void CalculateMovementPlayer(GridPosition curPlayer)
+    {
+        if (Vector2.Distance(curPlayer.current, curPlayer.target) > .05f)
+        {
+            inBetweenMoves = true;
+        }
+            
+        var inputVector = curPlayer == playerPositions.First() ? _inputVector : _inputVectorPlayer2;
+
+        if (!(Vector2.Distance(curPlayer.current, curPlayer.target) <= .05f) || inputVector == Vector2.zero) return;
+        var moveVector = CalcMoveVector(inputVector);
+        if (moveVector == Vector2.zero) return;
+            
+        var canMovePlayer = true;
+        if (CheckBoxCollision(curPlayer.target, moveVector))
+        {
+            //Checks if the original box pushed is a linked box.
+            canMovePlayer = PushRowOfBoxes(curPlayer, curPlayer.target, moveVector);
+        }
+
+        if (CheckWallAndPlayerCollisions(curPlayer, curPlayer.target, moveVector) || !canMovePlayer) return;
+        PullRowOfBoxes(curPlayer.target, moveVector);
+        curPlayer.target += moveVector;
+        AudioManager.Play("PlayerMove", true);
+            
+        UpdateMoveHistory();
+    }
+
+
     //Checks if there is a tile in the Walls tilemap at the position that is about to be moved to.
     //Returns true if there is a tile there.
     private bool CheckWallAndPlayerCollisions(GridPosition current, Vector2 position, Vector2 moveVector)
@@ -172,36 +246,7 @@ public class BoxHandler : MonoBehaviour
             }
         }
 
-        //Deals with sending input to the player target (aka preventing it from jumping around).
-        //Checks walls and the box pushing stuff above.
-        private void CalculateMovementPlayer(GridPosition curPlayer)
-        {
-            if (Vector2.Distance(curPlayer.current, curPlayer.target) > .05f)
-            {
-                inBetweenMoves = true;
-            }
-            
-            var inputVector = curPlayer == playerPositions.First() ? _inputVector : _inputVectorPlayer2;
-
-            if (!(Vector2.Distance(curPlayer.current, curPlayer.target) <= .05f) || inputVector == Vector2.zero) return;
-                var moveVector = CalcMoveVector(inputVector);
-            if (moveVector == Vector2.zero) return;
-            
-            var canMovePlayer = true;
-            if (CheckBoxCollision(curPlayer.target, moveVector))
-            {
-                //Checks if the original box pushed is a linked box.
-                canMovePlayer = PushRowOfBoxes(curPlayer, curPlayer.target, moveVector);
-            }
-
-            if (CheckWallAndPlayerCollisions(curPlayer, curPlayer.target, moveVector) || !canMovePlayer) return;
-            PullRowOfBoxes(curPlayer.target, moveVector);
-            curPlayer.target += moveVector;
-            AudioManager.Play("PlayerMove", true);
-            
-            UpdateMoveHistory();
-        }
-
+        
         private void UpdateMoveHistory()
         {
             foreach (var curPlayer in playerPositions)
@@ -257,47 +302,6 @@ public class BoxHandler : MonoBehaviour
             return moveVector;
         }
     
-        private void Update()
-        {
-            inBetweenMoves = false;
-            if (LevelHandler.inputEnabled)
-            {
-                _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-                if (!_levelHandler.isSinglePlayer)
-                {
-                    _inputVectorPlayer2 = new Vector2(Input.GetAxisRaw("Horizontal 2"), Input.GetAxisRaw("Vertical 2"));
-                }
-            }
-            else
-            {
-                _inputVector = Vector2.zero;
-                _inputVectorPlayer2 = Vector2.zero;
-            }
-            
-            _falling = new List<Box>();
-            _linked = new List<Box>();
-            
-            foreach (var box in boxes)
-            {
-                if (box.falling)
-                {
-                    _falling.Add(box);
-                }
-
-                if (box.linked)
-                {
-                    box.linkedMoved = false;
-                    _linked.Add(box);
-                }
-            }
-
-            foreach (var playerPosition in playerPositions)
-            {
-                
-                CalculateMovementPlayer(playerPosition);
-            }
-            CalculateFallingMovement();
-
-        }
+        
 
 }

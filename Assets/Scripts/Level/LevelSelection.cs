@@ -51,11 +51,6 @@ public class LevelSelection : MonoBehaviour
         sceneHandler.LoadScene(sceneName);
     }
 
-    private void GoToLevel(int levelIndex)
-    {
-        sceneHandler.LoadScene(levelIndex);
-    }
-
     private static string NameFromIndex(int buildIndex)
     {
         string path = SceneUtility.GetScenePathByBuildIndex(buildIndex);
